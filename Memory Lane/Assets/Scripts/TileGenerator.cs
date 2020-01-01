@@ -8,7 +8,7 @@ public class TileGenerator : MonoBehaviour
     private List<GameObject> tiles = new List<GameObject>();
 
     public GameObject TileTemplate;
-    public int GridWidth = 13;
+    public int GridWidth = 10;
     public int GridHeight = 10;
 
     // Start is called before the first frame update
