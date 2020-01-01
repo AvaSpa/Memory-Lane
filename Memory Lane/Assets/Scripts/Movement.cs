@@ -17,13 +17,6 @@ public class Movement : MonoBehaviour
     public int Step = 9;
     public float Speed = 0.01f;
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     private void Update()
     {
         if (shouldProcessInput)
