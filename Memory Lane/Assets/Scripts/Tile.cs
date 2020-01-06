@@ -2,6 +2,9 @@
 
 public class Tile : MonoBehaviour
 {
+    /// <summary>
+    /// TODO: This is becoming obsolete. Remove and set the lane/not lane colors through the Color field
+    /// </summary>
     public bool IsLane;
     public Color Color = Color.white;
 

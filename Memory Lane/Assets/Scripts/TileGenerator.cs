@@ -35,25 +35,46 @@ public class TileGenerator : MonoBehaviour
 
     public void HideLane()
     {
-        var color = Color.white;
         for (var i = 0; i < GridWidth; i++)
         {
             for (var j = 0; j < GridHeight; j++)
             {
-                var generatedColor = GetRandomColor();
+                var currentCoordinates = new Tuple<int, int>(i, j);
 
-                while (generatedColor == color)
-                {
-                    generatedColor = GetRandomColor();
-                }
-
-                color = generatedColor;
-                var tileScript = GetTileScript(new Tuple<int, int>(i, j));
-                tileScript.Color = color;
-                tileScript.IsLane = false;
+                var tileScript = GetTileScript(currentCoordinates);
+                tileScript.Color = GenerateColor(currentCoordinates);
+                tileScript.IsLane = true;
                 tileScript.UpdateVisuals();
             }
         }
+    }
+
+    private Color GenerateColor(Tuple<int, int> coordinates)
+    {
+        var generatedColor = GetRandomColor();
+        var previousTileColors = GetPreviousTileColors(coordinates);
+        while (previousTileColors.Contains(generatedColor))
+        {
+            generatedColor = GetRandomColor();
+        }
+
+        return generatedColor;
+    }
+
+    private List<Color> GetPreviousTileColors(Tuple<int, int> coordinates)
+    {
+        var result = new List<Color>();
+
+        var previous1 = GetTileScript(new Tuple<int, int>(coordinates.Item1, coordinates.Item2 - 1));
+        if (previous1 != null) result.Add(previous1.Color);
+        var previous2 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2 - 1));
+        if (previous2 != null) result.Add(previous2.Color);
+        var previous3 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2));
+        if (previous3 != null) result.Add(previous3.Color);
+        var previous4 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2 + 1));
+        if (previous4 != null) result.Add(previous4.Color);
+
+        return result;
     }
 
     private Color GetRandomColor()
@@ -93,6 +114,9 @@ public class TileGenerator : MonoBehaviour
 
     private Tile GetTileScript(Tuple<int, int> coordinates)
     {
+        if (coordinates.Item1 < 0 || coordinates.Item1 > GridWidth - 1 || coordinates.Item2 < 0 || coordinates.Item2 > GridHeight - 1)
+            return null;
+
         var tile = tiles[coordinates.Item1, coordinates.Item2];
         return tile.GetComponent<Tile>();
     }
