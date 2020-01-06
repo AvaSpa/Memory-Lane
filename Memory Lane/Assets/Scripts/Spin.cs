@@ -2,7 +2,7 @@
 
 public class Spin : MonoBehaviour
 {
-    public float Speed = 500;
+    public float Speed = 250;
 
     // Update is called once per frame
     void Update()
