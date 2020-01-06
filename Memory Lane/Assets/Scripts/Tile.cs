@@ -7,6 +7,11 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
+        UpdateVisuals();
+    }
+
+    public void UpdateVisuals()
+    {
         if (!IsLane)
             Color.a = 0.35f;
 

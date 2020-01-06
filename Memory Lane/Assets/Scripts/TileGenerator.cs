@@ -33,9 +33,33 @@ public class TileGenerator : MonoBehaviour
         lane.Add(new Tuple<int, int>(6, 4));
     }
 
-    private void HideLane()
+    public void HideLane()
     {
+        var color = Color.white;
+        for (var i = 0; i < GridWidth; i++)
+        {
+            for (var j = 0; j < GridHeight; j++)
+            {
+                var generatedColor = GetRandomColor();
 
+                while (generatedColor == color)
+                {
+                    generatedColor = GetRandomColor();
+                }
+
+                color = generatedColor;
+                var tileScript = GetTileScript(new Tuple<int, int>(i, j));
+                tileScript.Color = color;
+                tileScript.IsLane = false;
+                tileScript.UpdateVisuals();
+            }
+        }
+    }
+
+    private Color GetRandomColor()
+    {
+        var index = UnityEngine.Random.Range(0, colors.Count - 1);
+        return colors[index];
     }
 
     private void GenerateTiles()
