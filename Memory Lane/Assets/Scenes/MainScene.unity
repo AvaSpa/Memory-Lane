@@ -1027,7 +1027,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486444312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: -2}
+  m_LocalPosition: {x: 2, y: -5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 274376795}
@@ -1180,6 +1180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Platform: {fileID: 2101647287}
+  Mover: {fileID: 1486444313}
   UiLabel: {fileID: 848471213}
   Duration: 5
 --- !u!4 &2052035700
@@ -1257,6 +1258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileTemplate: {fileID: 4896358300866537188, guid: 1fbcbfb52c122a54995fb188eff0bbcb,
     type: 3}
+  Mover: {fileID: 1486444313}
   GridWidth: 9
   GridHeight: 9
 --- !u!4 &2101647288

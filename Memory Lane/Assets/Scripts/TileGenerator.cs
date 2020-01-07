@@ -12,6 +12,7 @@ public class TileGenerator : MonoBehaviour
     private List<Tuple<int, int>> lane = new List<Tuple<int, int>>();
 
     public GameObject TileTemplate;
+    public Mover Mover;
     public int GridWidth = 9;
     public int GridHeight = 9;
 
@@ -47,6 +48,15 @@ public class TileGenerator : MonoBehaviour
                 tileScript.UpdateVisuals();
             }
         }
+
+        InitializeMoverPosition();
+    }
+
+    private void InitializeMoverPosition()
+    {
+        var firstTileCoordinates = lane.FirstOrDefault();
+        var firstTile = tiles[firstTileCoordinates.Item1, firstTileCoordinates.Item2];
+        Mover.transform.position = new Vector3(firstTile.transform.position.x, 0, firstTile.transform.position.z);
     }
 
     private Color GenerateColor(Tuple<int, int> coordinates)

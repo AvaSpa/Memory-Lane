@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Mover : MonoBehaviour
 {
     private Vector3 offset;
 
-    private bool shouldProcessInput = true;
+    private bool shouldProcessInput;
 
     public GameObject Body;
     public GameObject Center;
@@ -14,8 +14,13 @@ public class Movement : MonoBehaviour
     public GameObject Left;
     public GameObject Right;
 
-    public int Step = 9;
+    public int Step = 5;
     public float Speed = 0.01f;
+
+    public void StartMoving()
+    {
+        shouldProcessInput = true;
+    }
 
     private void Update()
     {

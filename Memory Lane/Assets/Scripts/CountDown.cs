@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class CountDown : MonoBehaviour
 {
     public TileGenerator Platform;
+    public Mover Mover;
     public Text UiLabel;
     public float Duration = 5;
 
@@ -26,6 +27,7 @@ public class CountDown : MonoBehaviour
             if (timer <= 0)
             {
                 Platform.HideLane();
+                Mover.StartMoving();
                 UiLabel.text = string.Empty;
                 shouldUpdate = false;
             }
