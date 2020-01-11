@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
     private Vector3 offset;
 
-    private bool shouldProcessInput;
+    private bool shouldProcessInput = true;
 
     public GameObject Body;
     public GameObject Center;
@@ -17,39 +17,43 @@ public class Mover : MonoBehaviour
     public int Step = 5;
     public float Speed = 0.01f;
 
-    public void StartMoving()
-    {
-        shouldProcessInput = true;
-    }
-
-    private void Update()
+    public void MoveForward()
     {
         if (shouldProcessInput)
         {
-            if (Input.GetAxis("Vertical") > 0)
-            {
-                shouldProcessInput = false;
-                StartCoroutine("MoveForward");
-            }
-            else if (Input.GetAxis("Vertical") < 0)
-            {
-                shouldProcessInput = false;
-                StartCoroutine("MoveBack");
-            }
-            else if (Input.GetAxis("Horizontal") < 0)
-            {
-                shouldProcessInput = false;
-                StartCoroutine("MoveLeft");
-            }
-            else if (Input.GetAxis("Horizontal") > 0)
-            {
-                shouldProcessInput = false;
-                StartCoroutine("MoveRight");
-            }
+            shouldProcessInput = false;
+            StartCoroutine("InternalMoveForward");
         }
     }
 
-    private IEnumerator MoveForward()
+    public void MoveBack()
+    {
+        if (shouldProcessInput)
+        {
+            shouldProcessInput = false;
+            StartCoroutine("InternalMoveBack");
+        }
+    }
+
+    public void MoveLeft()
+    {
+        if (shouldProcessInput)
+        {
+            shouldProcessInput = false;
+            StartCoroutine("InternalMoveLeft");
+        }
+    }
+
+    public void MoveRight()
+    {
+        if (shouldProcessInput)
+        {
+            shouldProcessInput = false;
+            StartCoroutine("InternalMoveRight");
+        }
+    }
+
+    private IEnumerator InternalMoveForward()
     {
         for (var i = 0; i < 90 / Step; i++)
         {
@@ -60,7 +64,7 @@ public class Mover : MonoBehaviour
         shouldProcessInput = true;
     }
 
-    private IEnumerator MoveBack()
+    private IEnumerator InternalMoveBack()
     {
         for (var i = 0; i < 90 / Step; i++)
         {
@@ -71,7 +75,7 @@ public class Mover : MonoBehaviour
         shouldProcessInput = true;
     }
 
-    private IEnumerator MoveLeft()
+    private IEnumerator InternalMoveLeft()
     {
         for (var i = 0; i < 90 / Step; i++)
         {
@@ -82,7 +86,7 @@ public class Mover : MonoBehaviour
         shouldProcessInput = true;
     }
 
-    private IEnumerator MoveRight()
+    private IEnumerator InternalMoveRight()
     {
         for (var i = 0; i < 90 / Step; i++)
         {

@@ -9,14 +9,15 @@ public class TileGenerator : MonoBehaviour
     private const float StartingX = 2;
     private const float StartingZ = -2;
     private List<Color> colors = new List<Color> { Color.red, Color.yellow, Color.green, Color.blue, Color.magenta, new Color(0.5f, 0.25f, 0) };
-    private List<Tuple<int, int>> lane = new List<Tuple<int, int>>();
+
+    [HideInInspector]
+    public List<Tuple<int, int>> Lane { get; } = new List<Tuple<int, int>>();
 
     public GameObject TileTemplate;
     public Mover Mover;
     public int GridWidth = 9;
     public int GridHeight = 9;
 
-    // Start is called before the first frame update
     void Start()
     {
         GenerateExampleLane();
@@ -26,12 +27,12 @@ public class TileGenerator : MonoBehaviour
 
     private void GenerateExampleLane()
     {
-        lane.Add(new Tuple<int, int>(4, 7));
-        lane.Add(new Tuple<int, int>(4, 6));
-        lane.Add(new Tuple<int, int>(4, 5));
-        lane.Add(new Tuple<int, int>(4, 4));
-        lane.Add(new Tuple<int, int>(5, 4));
-        lane.Add(new Tuple<int, int>(6, 4));
+        Lane.Add(new Tuple<int, int>(4, 7));
+        Lane.Add(new Tuple<int, int>(4, 6));
+        Lane.Add(new Tuple<int, int>(4, 5));
+        Lane.Add(new Tuple<int, int>(4, 4));
+        Lane.Add(new Tuple<int, int>(5, 4));
+        Lane.Add(new Tuple<int, int>(6, 4));
     }
 
     public void HideLane()
@@ -54,7 +55,7 @@ public class TileGenerator : MonoBehaviour
 
     private void InitializeMoverPosition()
     {
-        var firstTileCoordinates = lane.FirstOrDefault();
+        var firstTileCoordinates = Lane.FirstOrDefault();
         var firstTile = tiles[firstTileCoordinates.Item1, firstTileCoordinates.Item2];
         Mover.transform.position = new Vector3(firstTile.transform.position.x, 0, firstTile.transform.position.z);
     }
@@ -110,15 +111,15 @@ public class TileGenerator : MonoBehaviour
             }
         }
 
-        foreach (var laneStep in lane)
+        foreach (var laneStep in Lane)
         {
             var tileScript = GetTileScript(laneStep);
             tileScript.IsLane = true;
         }
 
-        var firstTileScript = GetTileScript(lane.First());
+        var firstTileScript = GetTileScript(Lane.First());
         firstTileScript.Color = Color.white;
-        var lastTileScript = GetTileScript(lane.Last());
+        var lastTileScript = GetTileScript(Lane.Last());
         lastTileScript.Color = Color.black;
     }
 
