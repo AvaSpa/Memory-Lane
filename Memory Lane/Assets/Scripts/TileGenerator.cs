@@ -8,7 +8,7 @@ public class TileGenerator : MonoBehaviour
     private GameObject[,] tiles;
     private const float StartingX = 2;
     private const float StartingZ = -2;
-    private List<Color> colors = new List<Color> { Color.red, Color.yellow, Color.green, Color.blue, Color.magenta, new Color(0.5f, 0.25f, 0) };
+    private List<Color> colors = new List<Color> { Color.red, new Color(1, 1, 0, 1), Color.green, Color.blue };
 
     [HideInInspector]
     public List<Tuple<int, int>> Lane { get; } = new List<Tuple<int, int>>();
@@ -58,15 +58,33 @@ public class TileGenerator : MonoBehaviour
         var firstTileCoordinates = Lane.FirstOrDefault();
         var firstTile = tiles[firstTileCoordinates.Item1, firstTileCoordinates.Item2];
         Mover.transform.position = new Vector3(firstTile.transform.position.x, 0, firstTile.transform.position.z);
+        Mover.Position = firstTileCoordinates;
     }
 
     private Color GenerateColor(Tuple<int, int> coordinates)
     {
         var generatedColor = GetRandomColor();
         var previousTileColors = GetPreviousTileColors(coordinates);
-        while (previousTileColors.Contains(generatedColor))
+
+        //DEBUG
+        System.Diagnostics.Debug.WriteLine($"Generated color: {generatedColor}");
+        var previousColors = String.Join(", ", previousTileColors);
+        System.Diagnostics.Debug.WriteLine($"PRevious colors: {previousColors}");
+        //
+
+        var maxTryCount = 10;
+
+        while (maxTryCount >= 0 && previousTileColors.Contains(generatedColor))
         {
             generatedColor = GetRandomColor();
+
+            //DEBUG
+            System.Diagnostics.Debug.WriteLine($"----- Generated color: {generatedColor}");
+            previousColors = String.Join(", ", previousTileColors);
+            System.Diagnostics.Debug.WriteLine($"----- Previous colors: {previousColors}");
+            //
+
+            maxTryCount--;
         }
 
         return generatedColor;
@@ -76,11 +94,11 @@ public class TileGenerator : MonoBehaviour
     {
         var result = new List<Color>();
 
-        var previous1 = GetTileScript(new Tuple<int, int>(coordinates.Item1, coordinates.Item2 - 1));
+        var previous1 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 2, coordinates.Item2));
         if (previous1 != null) result.Add(previous1.Color);
-        var previous2 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2 - 1));
+        var previous2 = GetTileScript(new Tuple<int, int>(coordinates.Item1, coordinates.Item2 - 2));
         if (previous2 != null) result.Add(previous2.Color);
-        var previous3 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2));
+        var previous3 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2 - 1));
         if (previous3 != null) result.Add(previous3.Color);
         var previous4 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2 + 1));
         if (previous4 != null) result.Add(previous4.Color);
@@ -90,7 +108,7 @@ public class TileGenerator : MonoBehaviour
 
     private Color GetRandomColor()
     {
-        var index = UnityEngine.Random.Range(0, colors.Count - 1);
+        var index = UnityEngine.Random.Range(0, colors.Count);
         return colors[index];
     }
 
@@ -100,7 +118,7 @@ public class TileGenerator : MonoBehaviour
 
         for (var i = 0; i < GridWidth; i++)
         {
-            for (int j = 0; j < GridHeight; j++)
+            for (var j = 0; j < GridHeight; j++)
             {
                 var position = new Vector3(StartingX + i * 4, 0, StartingZ - j * 4);
                 var tile = Instantiate(TileTemplate, position, Quaternion.identity, transform);
@@ -123,7 +141,7 @@ public class TileGenerator : MonoBehaviour
         lastTileScript.Color = Color.black;
     }
 
-    private Tile GetTileScript(Tuple<int, int> coordinates)
+    public Tile GetTileScript(Tuple<int, int> coordinates)
     {
         if (coordinates.Item1 < 0 || coordinates.Item1 > GridWidth - 1 || coordinates.Item2 < 0 || coordinates.Item2 > GridHeight - 1)
             return null;

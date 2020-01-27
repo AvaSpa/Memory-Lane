@@ -6,7 +6,7 @@ public class CountDown : MonoBehaviour
     public TileGenerator Platform;
     public Mover Mover;
     public Text UiLabel;
-    public Button Button;//TODO: make this a list
+    public GameObject Panel;
     public float Duration = 5;
 
     private float timer;
@@ -29,7 +29,7 @@ public class CountDown : MonoBehaviour
             {
                 Platform.HideLane();
                 UiLabel.text = string.Empty;
-                Button.gameObject.SetActive(true);
+                Panel.SetActive(true);
                 shouldUpdate = false;
             }
         }

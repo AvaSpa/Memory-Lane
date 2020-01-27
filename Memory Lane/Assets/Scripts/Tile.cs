@@ -3,7 +3,7 @@
 public class Tile : MonoBehaviour
 {
     /// <summary>
-    /// TODO: This is becoming obsolete. Remove and set the lane/not lane colors through the Color field
+    /// TODO: Use this only internally to determine if tile is lane. Set the transparency of the color outside where it is decided if it's lane or not.
     /// </summary>
     public bool IsLane;
     public Color Color = Color.white;

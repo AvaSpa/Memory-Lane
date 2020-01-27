@@ -1,10 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    private Vector3 offset;
-
     private bool shouldProcessInput = true;
 
     public GameObject Body;
@@ -16,6 +15,9 @@ public class Mover : MonoBehaviour
 
     public int Step = 5;
     public float Speed = 0.01f;
+
+    [HideInInspector]
+    public Tuple<int, int> Position;
 
     public void MoveForward()
     {
@@ -62,6 +64,7 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
+        Position = new Tuple<int, int>(Position.Item1, Position.Item2 - 1);
     }
 
     private IEnumerator InternalMoveBack()
@@ -73,6 +76,7 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
+        Position = new Tuple<int, int>(Position.Item1, Position.Item2 + 1);
     }
 
     private IEnumerator InternalMoveLeft()
@@ -84,6 +88,7 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
+        Position = new Tuple<int, int>(Position.Item1 - 1, Position.Item2);
     }
 
     private IEnumerator InternalMoveRight()
@@ -95,5 +100,6 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
+        Position = new Tuple<int, int>(Position.Item1 + 1, Position.Item2);
     }
 }
