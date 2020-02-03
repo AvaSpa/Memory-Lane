@@ -127,7 +127,7 @@ public class TileGenerator : MonoBehaviour
                 tiles[i, j] = tile;
 
                 var tileScript = tile.GetComponent<Tile>();
-                tileScript.Color = new Color(0.2f, 0.2f, 0.2f, 0.35f);
+                tileScript.Color = new Color(0.5f, 0.5f, 0.5f);
             }
         }
 
@@ -135,7 +135,7 @@ public class TileGenerator : MonoBehaviour
         {
             var tileScript = GetTileScript(laneStep);
             tileScript.IsLane = true;
-            tileScript.Color.a = 1;
+            tileScript.Color = new Color(0.2f, 0.2f, 0.2f);
             tileScript.UpdateVisuals();
         }
 
