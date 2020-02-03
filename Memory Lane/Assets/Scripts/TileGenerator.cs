@@ -52,6 +52,21 @@ public class TileGenerator : MonoBehaviour
         InitializeMoverPosition();
     }
 
+    public void Collapse()
+    {
+        for (var i = 0; i < GridWidth; i++)
+        {
+            for (var j = 0; j < GridHeight; j++)
+            {
+                var currentCoordinates = new Tuple<int, int>(i, j);
+
+                var tileScript = GetTileScript(currentCoordinates);
+                if (!tileScript.IsLane)
+                    tileScript.gameObject.SetActive(false);
+            }
+        }
+    }
+
     private void InitializeMoverPosition()
     {
         var firstTileCoordinates = Lane.FirstOrDefault();

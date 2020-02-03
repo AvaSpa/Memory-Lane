@@ -21,6 +21,7 @@ public class Mover : MonoBehaviour
 
     public void MoveForward()
     {
+        Position = new Tuple<int, int>(Position.Item1, Position.Item2 - 1);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;
@@ -30,6 +31,7 @@ public class Mover : MonoBehaviour
 
     public void MoveBack()
     {
+        Position = new Tuple<int, int>(Position.Item1, Position.Item2 + 1);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;
@@ -39,6 +41,7 @@ public class Mover : MonoBehaviour
 
     public void MoveLeft()
     {
+        Position = new Tuple<int, int>(Position.Item1 - 1, Position.Item2);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;
@@ -48,6 +51,7 @@ public class Mover : MonoBehaviour
 
     public void MoveRight()
     {
+        Position = new Tuple<int, int>(Position.Item1 + 1, Position.Item2);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;
@@ -57,7 +61,9 @@ public class Mover : MonoBehaviour
 
     public void Kill()
     {
-        throw new NotImplementedException();
+        shouldProcessInput = false;
+        var rigidBody = gameObject.GetComponent<Rigidbody>();
+        rigidBody.useGravity = true;
     }
 
     private IEnumerator InternalMoveForward()
@@ -69,7 +75,6 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
-        Position = new Tuple<int, int>(Position.Item1, Position.Item2 - 1);
     }
 
     private IEnumerator InternalMoveBack()
@@ -81,7 +86,6 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
-        Position = new Tuple<int, int>(Position.Item1, Position.Item2 + 1);
     }
 
     private IEnumerator InternalMoveLeft()
@@ -93,7 +97,6 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
-        Position = new Tuple<int, int>(Position.Item1 - 1, Position.Item2);
     }
 
     private IEnumerator InternalMoveRight()
@@ -105,6 +108,5 @@ public class Mover : MonoBehaviour
         }
         Center.transform.position = Body.transform.position;
         shouldProcessInput = true;
-        Position = new Tuple<int, int>(Position.Item1 + 1, Position.Item2);
     }
 }

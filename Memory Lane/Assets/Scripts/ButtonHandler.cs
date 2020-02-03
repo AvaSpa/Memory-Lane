@@ -7,9 +7,10 @@ public class ButtonHandler : MonoBehaviour
 {
     public Mover Mover;
     public TileGenerator Platform;
+    public GameObject Panel;
     public Color Color;
 
-    public void Move()//TODO: remove tag "Finish" from the yellow button in the editor
+    public void Move()
     {
         var direction = GetDirection();
         switch (direction)
@@ -39,6 +40,8 @@ public class ButtonHandler : MonoBehaviour
         else
         {
             Mover.Kill();
+            Platform.Collapse();
+            Panel.SetActive(false);
         }
     }
 
