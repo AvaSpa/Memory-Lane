@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,22 +29,36 @@ public class ButtonHandler : MonoBehaviour
             case DirectionEnum.None:
                 break;
         }
+
+        var currentTile = Platform.GetTileScript(Mover.Position.Item1, Mover.Position.Item2);
+        if (currentTile.IsLane)
+        {
+            currentTile.IsLocked = true;
+            currentTile.UpdateVisuals();
+        }
+        else
+        {
+            Mover.Kill();
+        }
     }
 
     private DirectionEnum GetDirection()
     {
         var curentPosition = Mover.Position;
         var list = new List<Tile>();
-        var nextTileUp = Platform.GetTileScript(new Tuple<int, int>(curentPosition.Item1, curentPosition.Item2 - 1));
+        var nextTileUp = Platform.GetTileScript(curentPosition.Item1, curentPosition.Item2 - 1);
         list.Add(nextTileUp);
-        var nextTileDown = Platform.GetTileScript(new Tuple<int, int>(curentPosition.Item1, curentPosition.Item2 + 1));
+        var nextTileDown = Platform.GetTileScript(curentPosition.Item1, curentPosition.Item2 + 1);
         list.Add(nextTileDown);
-        var nextTileLeft = Platform.GetTileScript(new Tuple<int, int>(curentPosition.Item1 - 1, curentPosition.Item2));
+        var nextTileLeft = Platform.GetTileScript(curentPosition.Item1 - 1, curentPosition.Item2);
         list.Add(nextTileLeft);
-        var nextTileRight = Platform.GetTileScript(new Tuple<int, int>(curentPosition.Item1 + 1, curentPosition.Item2));
+        var nextTileRight = Platform.GetTileScript(curentPosition.Item1 + 1, curentPosition.Item2);
         list.Add(nextTileRight);
 
-        var correctTile = list.FirstOrDefault(t => t != null && t.Color == Color); //TODO: in case of 2 or more with same color pick the one on the lane
+        var candidateTiles = list.Where(t => t != null && t.Color == Color);
+        var correctTile = candidateTiles.FirstOrDefault(t => t.IsLane && !t.IsLocked);
+
+        if (correctTile == null) correctTile = candidateTiles.FirstOrDefault();
 
         if (correctTile == null) return DirectionEnum.None;
 

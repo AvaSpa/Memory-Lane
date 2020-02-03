@@ -55,6 +55,11 @@ public class Mover : MonoBehaviour
         }
     }
 
+    public void Kill()
+    {
+        throw new NotImplementedException();
+    }
+
     private IEnumerator InternalMoveForward()
     {
         for (var i = 0; i < 90 / Step; i++)

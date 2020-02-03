@@ -45,7 +45,6 @@ public class TileGenerator : MonoBehaviour
 
                 var tileScript = GetTileScript(currentCoordinates);
                 tileScript.Color = GenerateColor(currentCoordinates);
-                tileScript.IsLane = true;
                 tileScript.UpdateVisuals();
             }
         }
@@ -66,23 +65,11 @@ public class TileGenerator : MonoBehaviour
         var generatedColor = GetRandomColor();
         var previousTileColors = GetPreviousTileColors(coordinates);
 
-        //DEBUG
-        System.Diagnostics.Debug.WriteLine($"Generated color: {generatedColor}");
-        var previousColors = String.Join(", ", previousTileColors);
-        System.Diagnostics.Debug.WriteLine($"PRevious colors: {previousColors}");
-        //
-
         var maxTryCount = 10;
 
         while (maxTryCount >= 0 && previousTileColors.Contains(generatedColor))
         {
             generatedColor = GetRandomColor();
-
-            //DEBUG
-            System.Diagnostics.Debug.WriteLine($"----- Generated color: {generatedColor}");
-            previousColors = String.Join(", ", previousTileColors);
-            System.Diagnostics.Debug.WriteLine($"----- Previous colors: {previousColors}");
-            //
 
             maxTryCount--;
         }
@@ -125,7 +112,7 @@ public class TileGenerator : MonoBehaviour
                 tiles[i, j] = tile;
 
                 var tileScript = tile.GetComponent<Tile>();
-                tileScript.Color = new Color(0.1f, 0.1f, 0.1f);
+                tileScript.Color = new Color(0.2f, 0.2f, 0.2f, 0.35f);
             }
         }
 
@@ -133,12 +120,19 @@ public class TileGenerator : MonoBehaviour
         {
             var tileScript = GetTileScript(laneStep);
             tileScript.IsLane = true;
+            tileScript.Color.a = 1;
+            tileScript.UpdateVisuals();
         }
 
         var firstTileScript = GetTileScript(Lane.First());
         firstTileScript.Color = Color.white;
         var lastTileScript = GetTileScript(Lane.Last());
         lastTileScript.Color = Color.black;
+    }
+
+    public Tile GetTileScript(int i, int j)
+    {
+        return GetTileScript(new Tuple<int, int>(i, j));
     }
 
     public Tile GetTileScript(Tuple<int, int> coordinates)
