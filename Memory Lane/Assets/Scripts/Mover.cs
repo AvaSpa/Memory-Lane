@@ -66,6 +66,13 @@ public class Mover : MonoBehaviour
         rigidBody.useGravity = true;
     }
 
+    public void Reset()
+    {
+        shouldProcessInput = true;
+        var rigidBody = gameObject.GetComponent<Rigidbody>();
+        rigidBody.useGravity = false;
+    }
+
     private IEnumerator InternalMoveForward()
     {
         for (var i = 0; i < 90 / Step; i++)

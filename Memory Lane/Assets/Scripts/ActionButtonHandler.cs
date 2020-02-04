@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ButtonHandler : MonoBehaviour
+public class ActionButtonHandler : MonoBehaviour
 {
     public Mover Mover;
     public TileGenerator Platform;
     public GameObject Panel;
+    public GameController GameController;
     public Color Color;
 
     public void Move()
@@ -39,9 +40,7 @@ public class ButtonHandler : MonoBehaviour
         }
         else
         {
-            Mover.Kill();
-            Platform.Collapse();
-            Panel.SetActive(false);
+            GameController.EndGame();
         }
     }
 

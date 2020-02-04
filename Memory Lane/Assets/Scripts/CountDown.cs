@@ -7,6 +7,7 @@ public class CountDown : MonoBehaviour
     public Mover Mover;
     public Text UiLabel;
     public GameObject Panel;
+
     public float Duration = 5;
 
     private float timer;
@@ -14,8 +15,13 @@ public class CountDown : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         timer = Duration;
-        shouldUpdate = true; //TODO: reset this when switching levels if scene reloading is not done for that purpose
+        shouldUpdate = true;
     }
 
     private void Update()

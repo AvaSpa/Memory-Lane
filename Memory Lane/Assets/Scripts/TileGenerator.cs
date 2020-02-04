@@ -20,6 +20,8 @@ public class TileGenerator : MonoBehaviour
 
     void Start()
     {
+        tiles = new GameObject[GridWidth, GridHeight];
+
         GenerateExampleLane();
 
         GenerateTiles();
@@ -54,6 +56,27 @@ public class TileGenerator : MonoBehaviour
 
     public void Collapse()
     {
+        SetNonLaneTilesActive(false);
+    }
+
+    private void RestoreTiles()
+    {
+        SetNonLaneTilesActive(true);
+        SetLaneTilesBlocked(false);
+    }
+
+    private void SetLaneTilesBlocked(bool v)
+    {
+        foreach (var tile in Lane)
+        {
+            var script = GetTileScript(tile);
+            script.IsLocked = false;
+            script.UpdateVisuals();
+        }
+    }
+
+    private void SetNonLaneTilesActive(bool active)
+    {
         for (var i = 0; i < GridWidth; i++)
         {
             for (var j = 0; j < GridHeight; j++)
@@ -62,7 +85,7 @@ public class TileGenerator : MonoBehaviour
 
                 var tileScript = GetTileScript(currentCoordinates);
                 if (!tileScript.IsLane)
-                    tileScript.gameObject.SetActive(false);
+                    tileScript.gameObject.SetActive(active);
             }
         }
     }
@@ -71,6 +94,11 @@ public class TileGenerator : MonoBehaviour
     {
         var firstTileCoordinates = Lane.FirstOrDefault();
         var firstTile = tiles[firstTileCoordinates.Item1, firstTileCoordinates.Item2];
+
+        var tileScript = GetTileScript(firstTileCoordinates);
+        tileScript.IsLocked = true;
+        tileScript.UpdateVisuals();
+
         Mover.transform.position = new Vector3(firstTile.transform.position.x, 0, firstTile.transform.position.z);
         Mover.Position = firstTileCoordinates;
     }
@@ -114,20 +142,26 @@ public class TileGenerator : MonoBehaviour
         return colors[index];
     }
 
-    private void GenerateTiles()
+    public void GenerateTiles()
     {
-        tiles = new GameObject[GridWidth, GridHeight];
-
         for (var i = 0; i < GridWidth; i++)
         {
             for (var j = 0; j < GridHeight; j++)
             {
                 var position = new Vector3(StartingX + i * 4, 0, StartingZ - j * 4);
-                var tile = Instantiate(TileTemplate, position, Quaternion.identity, transform);
-                tiles[i, j] = tile;
+
+                GameObject tile = null;
+                if (tiles[i, j] == null)
+                {
+                    tile = Instantiate(TileTemplate, position, Quaternion.identity, transform);
+                    tiles[i, j] = tile;
+                }
+                else
+                    tile = tiles[i, j];
 
                 var tileScript = tile.GetComponent<Tile>();
                 tileScript.Color = new Color(0.5f, 0.5f, 0.5f);
+                tileScript.UpdateVisuals();
             }
         }
 
@@ -141,8 +175,12 @@ public class TileGenerator : MonoBehaviour
 
         var firstTileScript = GetTileScript(Lane.First());
         firstTileScript.Color = Color.white;
+        firstTileScript.UpdateVisuals();
         var lastTileScript = GetTileScript(Lane.Last());
         lastTileScript.Color = Color.black;
+        lastTileScript.UpdateVisuals();
+
+        RestoreTiles();
     }
 
     public Tile GetTileScript(int i, int j)

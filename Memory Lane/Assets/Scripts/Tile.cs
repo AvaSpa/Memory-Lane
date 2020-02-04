@@ -14,10 +14,9 @@ public class Tile : MonoBehaviour
     public void UpdateVisuals()
     {
         var material = GetComponent<Renderer>().material;
-        material.color = Color;
         if (IsLocked)
-        {
             material.color = new Color(0.2f, 0.2f, 0.2f);
-        }
+        else
+            material.color = Color;
     }
 }
