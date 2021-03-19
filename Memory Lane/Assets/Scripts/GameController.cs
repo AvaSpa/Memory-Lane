@@ -8,6 +8,14 @@ public class GameController : MonoBehaviour
     public GameObject Panel;
     public GameObject ResetButton;
     public CountDown CountDown;
+    public int CurrentLevel;
+
+    private const string LevelKey = "Level";
+
+    private void Awake()
+    {
+        CurrentLevel = PlayerPrefs.GetInt(LevelKey, 1);
+    }
 
     public void EndGame(bool fail)
     {
@@ -19,11 +27,13 @@ public class GameController : MonoBehaviour
 
     private void LevelComplete()
     {
+        CurrentLevel++;
+        PlayerPrefs.SetInt(LevelKey, CurrentLevel);
+        PlayerPrefs.Save();
+
         var button = ResetButton.GetComponent<Button>();
         var text = button.GetComponentInChildren<Text>();
         text.text = "Next";
-        var buttonScript = ResetButton.GetComponent<ResetButtonHandler>();
-        buttonScript.Success = true;
 
         Panel.SetActive(false);
         ResetButton.SetActive(true);
@@ -31,9 +41,6 @@ public class GameController : MonoBehaviour
 
     private void GameOver()
     {
-        var buttonScript = ResetButton.GetComponent<ResetButtonHandler>();
-        buttonScript.Success = false;
-
         Mover.Kill();
         Platform.Collapse();
         Panel.SetActive(false);

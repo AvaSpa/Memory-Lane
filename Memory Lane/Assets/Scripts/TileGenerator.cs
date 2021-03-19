@@ -15,6 +15,7 @@ public class TileGenerator : MonoBehaviour
 
     public GameObject TileTemplate;
     public Mover Mover;
+    public GameController GameController;
     public int GridWidth = 9;
     public int GridHeight = 9;
 
@@ -22,9 +23,15 @@ public class TileGenerator : MonoBehaviour
     {
         tiles = new GameObject[GridWidth, GridHeight];
 
+        LoadLevel(GameController.CurrentLevel);
         GenerateExampleLane();
 
         GenerateTiles();
+    }
+
+    private void LoadLevel(int currentLevel)
+    {
+        //TODO: Implement
     }
 
     private void GenerateExampleLane()
