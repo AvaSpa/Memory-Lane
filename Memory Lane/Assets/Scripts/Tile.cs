@@ -5,6 +5,7 @@ public class Tile : MonoBehaviour
     public bool IsLane;
     public Color Color = Color.white;
     public bool IsLocked;
+    public bool IsLast;
 
     private void Start()
     {

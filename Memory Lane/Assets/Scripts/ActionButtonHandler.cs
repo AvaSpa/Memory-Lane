@@ -37,10 +37,13 @@ public class ActionButtonHandler : MonoBehaviour
         {
             currentTile.IsLocked = true;
             currentTile.UpdateVisuals();
+
+            if (currentTile.IsLast)
+                GameController.EndGame(false);
         }
         else
         {
-            GameController.EndGame();
+            GameController.EndGame(true);
         }
     }
 

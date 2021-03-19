@@ -177,6 +177,7 @@ public class TileGenerator : MonoBehaviour
         firstTileScript.Color = Color.white;
         firstTileScript.UpdateVisuals();
         var lastTileScript = GetTileScript(Lane.Last());
+        lastTileScript.IsLast = true;
         lastTileScript.Color = Color.black;
         lastTileScript.UpdateVisuals();
 
