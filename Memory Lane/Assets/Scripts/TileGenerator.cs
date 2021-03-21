@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,38 +9,27 @@ public class TileGenerator : MonoBehaviour
     private const float StartingZ = -2;
     private List<Color> colors = new List<Color> { Color.red, new Color(1, 1, 0, 1), Color.green, Color.blue };
 
-    [HideInInspector]
-    public List<Tuple<int, int>> Lane { get; } = new List<Tuple<int, int>>();
+    private List<Vector2> _lane = new List<Vector2>();
 
     public GameObject TileTemplate;
     public Mover Mover;
     public GameController GameController;
     public int GridWidth = 9;
     public int GridHeight = 9;
+    public LevelList Levels;
 
     void Start()
     {
         tiles = new GameObject[GridWidth, GridHeight];
 
         LoadLevel(GameController.CurrentLevel);
-        GenerateExampleLane();
 
         GenerateTiles();
     }
 
     private void LoadLevel(int currentLevel)
     {
-        //TODO: Implement
-    }
-
-    private void GenerateExampleLane()
-    {
-        Lane.Add(new Tuple<int, int>(4, 7));
-        Lane.Add(new Tuple<int, int>(4, 6));
-        Lane.Add(new Tuple<int, int>(4, 5));
-        Lane.Add(new Tuple<int, int>(4, 4));
-        Lane.Add(new Tuple<int, int>(5, 4));
-        Lane.Add(new Tuple<int, int>(6, 4));
+        _lane = Levels.Levels[currentLevel - 1].Tiles;
     }
 
     public void HideLane()
@@ -50,7 +38,7 @@ public class TileGenerator : MonoBehaviour
         {
             for (var j = 0; j < GridHeight; j++)
             {
-                var currentCoordinates = new Tuple<int, int>(i, j);
+                var currentCoordinates = new Vector2(i, j);
 
                 var tileScript = GetTileScript(currentCoordinates);
                 tileScript.Color = GenerateColor(currentCoordinates);
@@ -74,7 +62,7 @@ public class TileGenerator : MonoBehaviour
 
     private void SetLaneTilesBlocked(bool v)
     {
-        foreach (var tile in Lane)
+        foreach (var tile in _lane)
         {
             var script = GetTileScript(tile);
             script.IsLocked = false;
@@ -88,7 +76,7 @@ public class TileGenerator : MonoBehaviour
         {
             for (var j = 0; j < GridHeight; j++)
             {
-                var currentCoordinates = new Tuple<int, int>(i, j);
+                var currentCoordinates = new Vector2(i, j);
 
                 var tileScript = GetTileScript(currentCoordinates);
                 if (!tileScript.IsLane)
@@ -99,8 +87,8 @@ public class TileGenerator : MonoBehaviour
 
     private void InitializeMoverPosition()
     {
-        var firstTileCoordinates = Lane.FirstOrDefault();
-        var firstTile = tiles[firstTileCoordinates.Item1, firstTileCoordinates.Item2];
+        var firstTileCoordinates = _lane.FirstOrDefault();
+        var firstTile = tiles[(int)firstTileCoordinates.x, (int)firstTileCoordinates.y];
 
         var tileScript = GetTileScript(firstTileCoordinates);
         tileScript.IsLocked = true;
@@ -110,7 +98,7 @@ public class TileGenerator : MonoBehaviour
         Mover.Position = firstTileCoordinates;
     }
 
-    private Color GenerateColor(Tuple<int, int> coordinates)
+    private Color GenerateColor(Vector2 coordinates)
     {
         var generatedColor = GetRandomColor();
         var previousTileColors = GetPreviousTileColors(coordinates);
@@ -127,17 +115,17 @@ public class TileGenerator : MonoBehaviour
         return generatedColor;
     }
 
-    private List<Color> GetPreviousTileColors(Tuple<int, int> coordinates)
+    private List<Color> GetPreviousTileColors(Vector2 coordinates)
     {
         var result = new List<Color>();
 
-        var previous1 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 2, coordinates.Item2));
+        var previous1 = GetTileScript(new Vector2(coordinates.x - 2, coordinates.y));
         if (previous1 != null) result.Add(previous1.Color);
-        var previous2 = GetTileScript(new Tuple<int, int>(coordinates.Item1, coordinates.Item2 - 2));
+        var previous2 = GetTileScript(new Vector2(coordinates.x, coordinates.y - 2));
         if (previous2 != null) result.Add(previous2.Color);
-        var previous3 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2 - 1));
+        var previous3 = GetTileScript(new Vector2(coordinates.x - 1, coordinates.y - 1));
         if (previous3 != null) result.Add(previous3.Color);
-        var previous4 = GetTileScript(new Tuple<int, int>(coordinates.Item1 - 1, coordinates.Item2 + 1));
+        var previous4 = GetTileScript(new Vector2(coordinates.x - 1, coordinates.y + 1));
         if (previous4 != null) result.Add(previous4.Color);
 
         return result;
@@ -145,7 +133,7 @@ public class TileGenerator : MonoBehaviour
 
     private Color GetRandomColor()
     {
-        var index = UnityEngine.Random.Range(0, colors.Count);
+        var index = Random.Range(0, colors.Count);
         return colors[index];
     }
 
@@ -172,7 +160,7 @@ public class TileGenerator : MonoBehaviour
             }
         }
 
-        foreach (var laneStep in Lane)
+        foreach (var laneStep in _lane)
         {
             var tileScript = GetTileScript(laneStep);
             tileScript.IsLane = true;
@@ -180,10 +168,10 @@ public class TileGenerator : MonoBehaviour
             tileScript.UpdateVisuals();
         }
 
-        var firstTileScript = GetTileScript(Lane.First());
+        var firstTileScript = GetTileScript(_lane.First());
         firstTileScript.Color = Color.white;
         firstTileScript.UpdateVisuals();
-        var lastTileScript = GetTileScript(Lane.Last());
+        var lastTileScript = GetTileScript(_lane.Last());
         lastTileScript.IsLast = true;
         lastTileScript.Color = Color.black;
         lastTileScript.UpdateVisuals();
@@ -191,17 +179,17 @@ public class TileGenerator : MonoBehaviour
         RestoreTiles();
     }
 
-    public Tile GetTileScript(int i, int j)
+    public Tile GetTileScript(float i, float j)
     {
-        return GetTileScript(new Tuple<int, int>(i, j));
+        return GetTileScript(new Vector2(i, j));
     }
 
-    public Tile GetTileScript(Tuple<int, int> coordinates)
+    public Tile GetTileScript(Vector2 coordinates)
     {
-        if (coordinates.Item1 < 0 || coordinates.Item1 > GridWidth - 1 || coordinates.Item2 < 0 || coordinates.Item2 > GridHeight - 1)
+        if (coordinates.x < 0 || coordinates.x > GridWidth - 1 || coordinates.y < 0 || coordinates.y > GridHeight - 1)
             return null;
 
-        var tile = tiles[coordinates.Item1, coordinates.Item2];
+        var tile = tiles[(int)coordinates.x, (int)coordinates.y];
         return tile.GetComponent<Tile>();
     }
 }

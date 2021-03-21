@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -17,11 +16,11 @@ public class Mover : MonoBehaviour
     public float Speed = 0.01f;
 
     [HideInInspector]
-    public Tuple<int, int> Position;
+    public Vector2 Position;
 
     public void MoveForward()
     {
-        Position = new Tuple<int, int>(Position.Item1, Position.Item2 - 1);
+        Position = new Vector2(Position.x, Position.y - 1);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;
@@ -31,7 +30,7 @@ public class Mover : MonoBehaviour
 
     public void MoveBack()
     {
-        Position = new Tuple<int, int>(Position.Item1, Position.Item2 + 1);
+        Position = new Vector2(Position.x, Position.y + 1);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;
@@ -41,7 +40,7 @@ public class Mover : MonoBehaviour
 
     public void MoveLeft()
     {
-        Position = new Tuple<int, int>(Position.Item1 - 1, Position.Item2);
+        Position = new Vector2(Position.x - 1, Position.y);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;
@@ -51,7 +50,7 @@ public class Mover : MonoBehaviour
 
     public void MoveRight()
     {
-        Position = new Tuple<int, int>(Position.Item1 + 1, Position.Item2);
+        Position = new Vector2(Position.x + 1, Position.y);
         if (shouldProcessInput)
         {
             shouldProcessInput = false;

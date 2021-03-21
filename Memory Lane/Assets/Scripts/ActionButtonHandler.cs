@@ -32,7 +32,7 @@ public class ActionButtonHandler : MonoBehaviour
                 break;
         }
 
-        var currentTile = Platform.GetTileScript(Mover.Position.Item1, Mover.Position.Item2);
+        var currentTile = Platform.GetTileScript(Mover.Position);
         if (currentTile.IsLane)
         {
             currentTile.IsLocked = true;
@@ -51,13 +51,13 @@ public class ActionButtonHandler : MonoBehaviour
     {
         var curentPosition = Mover.Position;
         var list = new List<Tile>();
-        var nextTileUp = Platform.GetTileScript(curentPosition.Item1, curentPosition.Item2 - 1);
+        var nextTileUp = Platform.GetTileScript(curentPosition.x, curentPosition.y - 1);
         list.Add(nextTileUp);
-        var nextTileDown = Platform.GetTileScript(curentPosition.Item1, curentPosition.Item2 + 1);
+        var nextTileDown = Platform.GetTileScript(curentPosition.x, curentPosition.y + 1);
         list.Add(nextTileDown);
-        var nextTileLeft = Platform.GetTileScript(curentPosition.Item1 - 1, curentPosition.Item2);
+        var nextTileLeft = Platform.GetTileScript(curentPosition.x - 1, curentPosition.y);
         list.Add(nextTileLeft);
-        var nextTileRight = Platform.GetTileScript(curentPosition.Item1 + 1, curentPosition.Item2);
+        var nextTileRight = Platform.GetTileScript(curentPosition.x + 1, curentPosition.y);
         list.Add(nextTileRight);
 
         var candidateTiles = list.Where(t => t != null && t.Color == Color);

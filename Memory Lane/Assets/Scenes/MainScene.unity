@@ -2691,6 +2691,7 @@ MonoBehaviour:
   GameController: {fileID: 680007977}
   GridWidth: 9
   GridHeight: 9
+  Levels: {fileID: 11400000, guid: 9cdfdc750078700469145a9a5dc5bd66, type: 2}
 --- !u!4 &2101647288
 Transform:
   m_ObjectHideFlags: 0
