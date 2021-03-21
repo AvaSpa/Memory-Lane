@@ -53,8 +53,10 @@
     <UnityVersion>2020.2.7f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ScriptableObjects\LevelList.cs" />
     <Compile Include="Assets\Scripts\Mover.cs" />
     <Compile Include="Assets\Scripts\Enums\DirectionEnum.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Level.cs" />
     <Compile Include="Assets\Scripts\ResetButtonHandler.cs" />
     <Compile Include="Assets\Scripts\ActionButtonHandler.cs" />
     <Compile Include="Assets\Scripts\TileGenerator.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Assets\Scripts\Utils\IListExtensions.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\MakeLevelList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
