@@ -67,6 +67,10 @@ public class ActionButtonHandler : MonoBehaviour
 
         if (correctTile == null) return DirectionEnum.None;
 
+        if (correctTile.IsLocked) return DirectionEnum.None;
+
+        correctTile.IsLocked = true;
+
         switch (list.IndexOf(correctTile))
         {
             case 0:

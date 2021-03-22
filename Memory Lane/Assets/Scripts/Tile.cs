@@ -12,6 +12,11 @@ public class Tile : MonoBehaviour
         UpdateVisuals();
     }
 
+    public override string ToString()
+    {
+        return $"IsLane: {IsLane} - IsLocked: {IsLocked}";
+    }
+
     public void UpdateVisuals()
     {
         var material = GetComponent<Renderer>().material;
