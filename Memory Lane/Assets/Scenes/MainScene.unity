@@ -735,6 +735,9 @@ MonoBehaviour:
   ResetButton: {fileID: 960659003}
   CountDown: {fileID: 2052035699}
   CurrentLevel: 0
+  Camera: {fileID: 963194228}
+  CameraTranslationSpeed: 20
+  CameraRotationSpeed: 25
 --- !u!4 &680007978
 Transform:
   m_ObjectHideFlags: 0
@@ -1350,13 +1353,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.21049298, y: 0.26506844, z: -0.059413522, w: 0.93909615}
-  m_LocalPosition: {x: -12.311655, y: 26.728724, z: -53.18845}
+  m_LocalRotation: {x: 0.2080551, y: 0.26910362, z: -0.05965883, w: 0.938476}
+  m_LocalPosition: {x: -12, y: 27, z: -53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 32, z: 0}
 --- !u!1 &1102698340
 GameObject:
   m_ObjectHideFlags: 0
