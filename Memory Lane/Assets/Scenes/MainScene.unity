@@ -2710,6 +2710,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileTemplate: {fileID: 4896358300866537188, guid: 1fbcbfb52c122a54995fb188eff0bbcb,
     type: 3}
+  LaneTileBaseTemplate: {fileID: 3942690339673815412, guid: c7fce4e7816f83a4b9c94974615554c7,
+    type: 3}
   Mover: {fileID: 1486444313}
   GameController: {fileID: 680007977}
   GridWidth: 9
