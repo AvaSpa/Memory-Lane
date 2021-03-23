@@ -8,7 +8,6 @@ public class ActionButtonHandler : MonoBehaviour
     public Mover Mover;
     public TileGenerator Platform;
     public GameObject Panel;
-    public GameController GameController;
     public Color Color;
 
     public void Move()
@@ -30,20 +29,6 @@ public class ActionButtonHandler : MonoBehaviour
                 break;
             case DirectionEnum.None:
                 break;
-        }
-
-        var currentTile = Platform.GetTileScript(Mover.Position);
-        if (currentTile.IsLane)
-        {
-            currentTile.IsLocked = true;
-            currentTile.UpdateVisuals();
-
-            if (currentTile.IsLast)
-                GameController.EndGame(false);
-        }
-        else
-        {
-            GameController.EndGame(true);
         }
     }
 
@@ -68,8 +53,6 @@ public class ActionButtonHandler : MonoBehaviour
         if (correctTile == null) return DirectionEnum.None;
 
         if (correctTile.IsLocked) return DirectionEnum.None;
-
-        correctTile.IsLocked = true;
 
         switch (list.IndexOf(correctTile))
         {

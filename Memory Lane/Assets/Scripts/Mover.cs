@@ -11,6 +11,8 @@ public class Mover : MonoBehaviour
     public GameObject Back;
     public GameObject Left;
     public GameObject Right;
+    public GameController GameController;
+    public TileGenerator Platform;
 
     public int Step = 5;
     public float Speed = 0.01f;
@@ -20,41 +22,41 @@ public class Mover : MonoBehaviour
 
     public void MoveForward()
     {
-        Position = new Vector2(Position.x, Position.y - 1);
         if (shouldProcessInput)
         {
+            Position = new Vector2(Position.x, Position.y - 1);
             shouldProcessInput = false;
-            StartCoroutine("InternalMoveForward");
+            StartCoroutine(InternalMoveForward());
         }
     }
 
     public void MoveBack()
     {
-        Position = new Vector2(Position.x, Position.y + 1);
         if (shouldProcessInput)
         {
+            Position = new Vector2(Position.x, Position.y + 1);
             shouldProcessInput = false;
-            StartCoroutine("InternalMoveBack");
+            StartCoroutine(InternalMoveBack());
         }
     }
 
     public void MoveLeft()
     {
-        Position = new Vector2(Position.x - 1, Position.y);
         if (shouldProcessInput)
         {
+            Position = new Vector2(Position.x - 1, Position.y);
             shouldProcessInput = false;
-            StartCoroutine("InternalMoveLeft");
+            StartCoroutine(InternalMoveLeft());
         }
     }
 
     public void MoveRight()
     {
-        Position = new Vector2(Position.x + 1, Position.y);
         if (shouldProcessInput)
         {
+            Position = new Vector2(Position.x + 1, Position.y);
             shouldProcessInput = false;
-            StartCoroutine("InternalMoveRight");
+            StartCoroutine(InternalMoveRight());
         }
     }
 
@@ -72,6 +74,23 @@ public class Mover : MonoBehaviour
         rigidBody.useGravity = false;
     }
 
+    private void UpdateWalkedTile()
+    {
+        var currentTile = Platform.GetTileScript(Position);
+        if (currentTile.IsLane)
+        {
+            currentTile.IsLocked = true;
+            currentTile.UpdateVisuals();
+
+            if (currentTile.IsLast)
+                GameController.EndGame(false);
+        }
+        else
+        {
+            GameController.EndGame(true);
+        }
+    }
+
     private IEnumerator InternalMoveForward()
     {
         for (var i = 0; i < 90 / Step; i++)
@@ -80,7 +99,9 @@ public class Mover : MonoBehaviour
             yield return new WaitForSeconds(Speed);
         }
         Center.transform.position = Body.transform.position;
+        UpdateWalkedTile();
         shouldProcessInput = true;
+        yield return new WaitForEndOfFrame();
     }
 
     private IEnumerator InternalMoveBack()
@@ -91,7 +112,9 @@ public class Mover : MonoBehaviour
             yield return new WaitForSeconds(Speed);
         }
         Center.transform.position = Body.transform.position;
+        UpdateWalkedTile();
         shouldProcessInput = true;
+        yield return new WaitForEndOfFrame();
     }
 
     private IEnumerator InternalMoveLeft()
@@ -102,7 +125,9 @@ public class Mover : MonoBehaviour
             yield return new WaitForSeconds(Speed);
         }
         Center.transform.position = Body.transform.position;
+        UpdateWalkedTile();
         shouldProcessInput = true;
+        yield return new WaitForEndOfFrame();
     }
 
     private IEnumerator InternalMoveRight()
@@ -113,6 +138,8 @@ public class Mover : MonoBehaviour
             yield return new WaitForSeconds(Speed);
         }
         Center.transform.position = Body.transform.position;
+        UpdateWalkedTile();
         shouldProcessInput = true;
+        yield return new WaitForEndOfFrame();
     }
 }

@@ -375,7 +375,6 @@ MonoBehaviour:
   Mover: {fileID: 1486444313}
   Platform: {fileID: 2101647287}
   Panel: {fileID: 558220716}
-  GameController: {fileID: 680007977}
   Color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &398428699
 MonoBehaviour:
@@ -1494,7 +1493,6 @@ MonoBehaviour:
   Mover: {fileID: 1486444313}
   Platform: {fileID: 2101647287}
   Panel: {fileID: 558220716}
-  GameController: {fileID: 680007977}
   Color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &1103018369
 MonoBehaviour:
@@ -2051,6 +2049,8 @@ MonoBehaviour:
   Back: {fileID: 868114373}
   Left: {fileID: 2072408449}
   Right: {fileID: 1775926128}
+  GameController: {fileID: 680007977}
+  Platform: {fileID: 2101647287}
   Step: 5
   Speed: 0.01
   Position: {x: 0, y: 0}
@@ -2181,7 +2181,6 @@ MonoBehaviour:
   Mover: {fileID: 1486444313}
   Platform: {fileID: 2101647287}
   Panel: {fileID: 558220716}
-  GameController: {fileID: 680007977}
   Color: {r: 1, g: 1, b: 0, a: 1}
 --- !u!114 &1600312968
 MonoBehaviour:
@@ -2411,7 +2410,6 @@ MonoBehaviour:
   Mover: {fileID: 1486444313}
   Platform: {fileID: 2101647287}
   Panel: {fileID: 558220716}
-  GameController: {fileID: 680007977}
   Color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &1770780262
 MonoBehaviour:
