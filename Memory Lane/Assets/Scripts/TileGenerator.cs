@@ -12,6 +12,7 @@ public class TileGenerator : MonoBehaviour
     private List<Vector2> _lane = new List<Vector2>();
 
     public GameObject TileTemplate;
+    public GameObject LaneTileBaseTemplate;
     public Mover Mover;
     public GameController GameController;
     public int GridWidth = 9;
@@ -162,6 +163,9 @@ public class TileGenerator : MonoBehaviour
 
         foreach (var laneStep in _lane)
         {
+            var position = new Vector3(StartingX + laneStep.x * 4, -10.005f, StartingZ - laneStep.y * 4);
+            Instantiate(LaneTileBaseTemplate, position, Quaternion.identity, transform);
+
             var tileScript = GetTileScript(laneStep);
             tileScript.IsLane = true;
             tileScript.Color = new Color(0.2f, 0.2f, 0.2f);
