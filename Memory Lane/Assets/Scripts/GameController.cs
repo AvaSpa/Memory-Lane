@@ -61,9 +61,9 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt(LevelKey, CurrentLevel);
         PlayerPrefs.Save();
 
-        var button = ResetButton.GetComponent<Button>();
-        var text = button.GetComponentInChildren<Text>();
-        text.text = "Next";
+        var buttonScript = ResetButton.GetComponent<ResetButtonHandler>();
+        buttonScript.Next.SetActive(true);
+        buttonScript.Restart.SetActive(false);
 
         Panel.SetActive(false);
         ResetButton.SetActive(true);
