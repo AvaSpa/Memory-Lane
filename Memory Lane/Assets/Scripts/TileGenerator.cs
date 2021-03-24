@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TileGenerator : MonoBehaviour
 {
@@ -30,7 +31,10 @@ public class TileGenerator : MonoBehaviour
 
     private void LoadLevel(int currentLevel)
     {
-        _lane = Levels.Levels[currentLevel - 1].Tiles;
+        if (Levels.Levels.Count >= currentLevel)
+            _lane = Levels.Levels[currentLevel - 1].Tiles;
+        else
+            SceneManager.LoadScene("MenuScene");
     }
 
     public void HideLane()
