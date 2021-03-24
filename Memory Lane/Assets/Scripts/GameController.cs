@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public TileGenerator Platform;
     public GameObject Panel;
     public GameObject ResetButton;
+    public Text LevelText;
     public CountDown CountDown;
     public int CurrentLevel;
     public Transform Camera;
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         CurrentLevel = PlayerPrefs.GetInt(LevelKey, 1);
+        LevelText.text = $"Level: {CurrentLevel}";
     }
 
     private void Start()
