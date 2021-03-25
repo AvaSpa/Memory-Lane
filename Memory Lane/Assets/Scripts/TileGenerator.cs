@@ -19,6 +19,7 @@ public class TileGenerator : MonoBehaviour
     public int GridWidth = 9;
     public int GridHeight = 9;
     public LevelList Levels;
+    public SceneChanger SceneChanger;
 
     void Start()
     {
@@ -34,7 +35,7 @@ public class TileGenerator : MonoBehaviour
         if (Levels.Levels.Count >= currentLevel)
             _lane = Levels.Levels[currentLevel - 1].Tiles;
         else
-            SceneManager.LoadScene("MenuScene");
+            SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Menu);
     }
 
     public void HideLane()

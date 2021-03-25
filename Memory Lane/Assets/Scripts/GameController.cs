@@ -15,11 +15,12 @@ public class GameController : MonoBehaviour
     public int CameraTranslationSpeed;
     public int CameraRotationSpeed;
 
-    private const string LevelKey = "Level";
+    private const string CurrentLevelKey = "CurrentLevel";
+    private const string MaxLevelKey = "MaxLevel";
 
     private void Awake()
     {
-        CurrentLevel = PlayerPrefs.GetInt(LevelKey, 1);
+        CurrentLevel = PlayerPrefs.GetInt(CurrentLevelKey, 1);
         LevelText.text = $"Level: {CurrentLevel}";
     }
 
@@ -60,7 +61,8 @@ public class GameController : MonoBehaviour
     private void LevelComplete()
     {
         CurrentLevel++;
-        PlayerPrefs.SetInt(LevelKey, CurrentLevel);
+        PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
+        PlayerPrefs.SetInt(MaxLevelKey, CurrentLevel);
         PlayerPrefs.Save();
 
         var buttonScript = ResetButton.GetComponent<ResetButtonHandler>();
