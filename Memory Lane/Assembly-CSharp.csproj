@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ScriptableObjects\LevelList.cs" />
+    <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Mover.cs" />
     <Compile Include="Assets\Scripts\Enums\DirectionEnum.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Level.cs" />
@@ -68,7 +69,8 @@
     <Compile Include="Assets\Scripts\Utils\IListExtensions.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
-    <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\SceneChanger.cs" />
+    <Compile Include="Assets\Scripts\Enums\SceneEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

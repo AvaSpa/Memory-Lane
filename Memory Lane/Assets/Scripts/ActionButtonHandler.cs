@@ -15,24 +15,24 @@ public class ActionButtonHandler : MonoBehaviour
         var direction = GetDirection();
         switch (direction)
         {
-            case DirectionEnum.Forward:
+            case Direction.Forward:
                 Mover.MoveForward();
                 break;
-            case DirectionEnum.Back:
+            case Direction.Back:
                 Mover.MoveBack();
                 break;
-            case DirectionEnum.Left:
+            case Direction.Left:
                 Mover.MoveLeft();
                 break;
-            case DirectionEnum.Right:
+            case Direction.Right:
                 Mover.MoveRight();
                 break;
-            case DirectionEnum.None:
+            case Direction.None:
                 break;
         }
     }
 
-    private DirectionEnum GetDirection()
+    private Direction GetDirection()
     {
         var curentPosition = Mover.Position;
         var list = new List<Tile>();
@@ -50,22 +50,22 @@ public class ActionButtonHandler : MonoBehaviour
 
         if (correctTile == null) correctTile = candidateTiles.FirstOrDefault();
 
-        if (correctTile == null) return DirectionEnum.None;
+        if (correctTile == null) return Direction.None;
 
-        if (correctTile.IsLocked) return DirectionEnum.None;
+        if (correctTile.IsLocked) return Direction.None;
 
         switch (list.IndexOf(correctTile))
         {
             case 0:
-                return DirectionEnum.Forward;
+                return Direction.Forward;
             case 1:
-                return DirectionEnum.Back;
+                return Direction.Back;
             case 2:
-                return DirectionEnum.Left;
+                return Direction.Left;
             case 3:
-                return DirectionEnum.Right;
+                return Direction.Right;
             default:
-                return DirectionEnum.None;
+                return Direction.None;
         }
     }
 }

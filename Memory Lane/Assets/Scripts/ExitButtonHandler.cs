@@ -1,10 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ExitButtonHandler : MonoBehaviour
 {
-    public void Exit()
+    public SceneChanger SceneChanger;
+
+    public void GoToMenu()
     {
-        SceneManager.LoadScene("MenuScene");
+        SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Menu);
     }
 }
