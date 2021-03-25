@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\SceneChanger.cs" />
     <Compile Include="Assets\Scripts\Enums\SceneEnum.cs" />
+    <Compile Include="Assets\Scripts\ContinueButtonHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

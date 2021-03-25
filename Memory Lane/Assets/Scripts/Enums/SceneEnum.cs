@@ -2,6 +2,6 @@
 {
     public enum SceneIdentity
     {
-        Main, Menu
+        Menu, Main
     }
 }
