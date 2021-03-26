@@ -13,6 +13,7 @@ public class Mover : MonoBehaviour
     public GameObject Right;
     public GameController GameController;
     public TileGenerator Platform;
+    public AudioSource StepAudio;
 
     public int Step = 5;
     public float Speed = 0.01f;
@@ -93,6 +94,7 @@ public class Mover : MonoBehaviour
 
     private IEnumerator InternalMoveForward()
     {
+        StepAudio.Play();
         for (var i = 0; i < 90 / Step; i++)
         {
             Body.transform.RotateAround(Forward.transform.position, Vector3.right, Step);
@@ -106,6 +108,7 @@ public class Mover : MonoBehaviour
 
     private IEnumerator InternalMoveBack()
     {
+        StepAudio.Play();
         for (var i = 0; i < 90 / Step; i++)
         {
             Body.transform.RotateAround(Back.transform.position, Vector3.left, Step);
@@ -119,6 +122,7 @@ public class Mover : MonoBehaviour
 
     private IEnumerator InternalMoveLeft()
     {
+        StepAudio.Play();
         for (var i = 0; i < 90 / Step; i++)
         {
             Body.transform.RotateAround(Left.transform.position, Vector3.forward, Step);
@@ -132,6 +136,7 @@ public class Mover : MonoBehaviour
 
     private IEnumerator InternalMoveRight()
     {
+        StepAudio.Play();
         for (var i = 0; i < 90 / Step; i++)
         {
             Body.transform.RotateAround(Right.transform.position, Vector3.back, Step);
