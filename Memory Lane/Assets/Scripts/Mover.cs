@@ -67,6 +67,10 @@ public class Mover : MonoBehaviour
         shouldProcessInput = false;
         var rigidBody = gameObject.GetComponent<Rigidbody>();
         rigidBody.useGravity = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
         FallAudio.Play();
     }
 
