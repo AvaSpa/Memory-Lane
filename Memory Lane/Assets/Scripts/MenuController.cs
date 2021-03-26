@@ -30,9 +30,10 @@ public class MenuController : MonoBehaviour
             itemText.text += i + 1;
 
             var button = listItem.GetComponent<Button>();
+            var buttonLevel = i + 1;
             button.onClick.AddListener(() =>
             {
-                PlayerPrefs.SetInt(CurrentLevelKey, i);
+                PlayerPrefs.SetInt(CurrentLevelKey, buttonLevel);
                 SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
             });
         }
