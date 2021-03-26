@@ -14,6 +14,7 @@ public class Mover : MonoBehaviour
     public GameController GameController;
     public TileGenerator Platform;
     public AudioSource StepAudio;
+    public AudioSource FallAudio;
 
     public int Step = 5;
     public float Speed = 0.01f;
@@ -66,6 +67,7 @@ public class Mover : MonoBehaviour
         shouldProcessInput = false;
         var rigidBody = gameObject.GetComponent<Rigidbody>();
         rigidBody.useGravity = true;
+        FallAudio.Play();
     }
 
     public void Reset()
