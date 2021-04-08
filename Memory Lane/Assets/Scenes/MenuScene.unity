@@ -677,10 +677,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sounds:
-  - Name: Background
+  - Name: Background1
     Clip: {fileID: 8300000, guid: 4930f02191a3e4048bd954fc57b361c9, type: 3}
     Volume: 0.05
-    Loop: 1
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Background2
+    Clip: {fileID: 8300000, guid: e9808aa7f17b0af40803b1ce161ff684, type: 3}
+    Volume: 0.05
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Background3
+    Clip: {fileID: 8300000, guid: 1c1c43100e782b94fa0fb158512fa9ef, type: 3}
+    Volume: 0.05
+    Loop: 0
     Source: {fileID: 0}
 --- !u!4 &1466065430
 Transform:

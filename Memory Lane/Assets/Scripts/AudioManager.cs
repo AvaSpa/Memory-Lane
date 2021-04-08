@@ -1,4 +1,5 @@
 using Assets.Scripts.Utils;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -31,7 +32,22 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("Background");
+        StartCoroutine(CyclePlayAll());
+    }
+
+    private IEnumerator CyclePlayAll()
+    {
+        while (true)
+        {
+            foreach (var sound in Sounds)
+            {
+                sound.Source.Play();
+                while (sound.Source.isPlaying)
+                {
+                    yield return null;
+                }
+            }
+        }
     }
 
     public void Play(string name)
