@@ -62,7 +62,11 @@ public class GameController : MonoBehaviour
     {
         CurrentLevel++;
         PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
-        PlayerPrefs.SetInt(MaxLevelKey, CurrentLevel);
+
+        var currentMaxLevel = PlayerPrefs.GetInt(MaxLevelKey, 1);
+        if (currentMaxLevel <= CurrentLevel)
+            PlayerPrefs.SetInt(MaxLevelKey, CurrentLevel);
+
         PlayerPrefs.Save();
 
         var buttonScript = ResetButton.GetComponent<ResetButtonHandler>();
