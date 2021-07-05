@@ -28,20 +28,29 @@ namespace Assets.Scripts.ScriptableObjects
                 try
                 {
                     var tileSplit = line.Split();
+                    var lastTile = new Vector2(-200, 0);
                     foreach (var tile in tileSplit)
                     {
                         var pointSplit = tile.Split(',');
                         var x = int.Parse(pointSplit[0]);
                         var y = int.Parse(pointSplit[1]);
-                        var vector = new Vector2(x, y);
+                        var tileVector = new Vector2(x, y);
 
-                        level.Tiles.Add(vector);
+                        if (lastTile.x < 0 || tileVector.x == lastTile.x || tileVector.y == lastTile.y)
+                        {
+                            level.Tiles.Add(tileVector);
+                            lastTile = tileVector;
+                        }
+                        else
+                        {
+                            throw new Exception($"No continuity between {lastTile} and {tileVector}");
+                        }
                     }
                 }
                 catch (Exception e)
                 {
                     Debug.LogException(e);
-                    Debug.Log(line);
+                    Debug.Log($"*{i}: {line}");
                 }
 
                 AssetDatabase.CreateAsset(level, $"Assets/Levels/Level{i + 1}.asset");
