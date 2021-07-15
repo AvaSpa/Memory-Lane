@@ -42,6 +42,11 @@ public class Mover : MonoBehaviour
         }
     }
 
+    internal void StartWinAnimation()
+    {
+        //throw new System.NotImplementedException();
+    }
+
     public void MoveLeft()
     {
         if (shouldProcessInput)

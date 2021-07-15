@@ -8,28 +8,41 @@ namespace Assets.Scripts
         public float TranslationSpeed = 15.1f;
         public float RotationSpeed = 21.5f;
 
+        public Transform PlayerVisualPosition;
+
+        private Vector3 PlayViewPosition = new Vector3(20, 40, -30);
+        private Vector3 PlayViewRotation = new Vector3(75, 0, 0);
+        private Vector3 PlayerViewRotation = new Vector3(0, 0, 0);
+
+        private const int CameraPlayerDistance = 13;
+
         private void Start()
         {
-            StartCoroutine(MoveCameraToPlayPosition(TranslationSpeed));
-            StartCoroutine(RotateCameraToPlayPosition(RotationSpeed));
+            StartCoroutine(MoveCameraToPosition(PlayViewPosition, TranslationSpeed));
+            StartCoroutine(RotateCameraToPosition(PlayViewRotation, RotationSpeed));
         }
 
-        private IEnumerator MoveCameraToPlayPosition(float speed = 1)
+        public void ShowPlayerInDetail()
         {
-            var destination = new Vector3(20, 40, -30);
-            while (transform.position != destination)
+            var playerViewPosition = new Vector3(PlayerVisualPosition.position.x, PlayerVisualPosition.position.y, PlayerVisualPosition.position.z - CameraPlayerDistance);
+            StartCoroutine(MoveCameraToPosition(playerViewPosition, TranslationSpeed));
+            StartCoroutine(RotateCameraToPosition(PlayerViewRotation, RotationSpeed));
+        }
+
+        private IEnumerator MoveCameraToPosition(Vector3 position, float speed = 1)
+        {
+            while (transform.position != position)
             {
-                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, position, speed * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
         }
 
-        private IEnumerator RotateCameraToPlayPosition(float speed = 1)
+        private IEnumerator RotateCameraToPosition(Vector3 rotation, float speed = 1)
         {
-            var destination = new Vector3(75, 0, 0);
-            while (transform.rotation.eulerAngles != destination)
+            while (transform.rotation.eulerAngles != rotation)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(destination), speed * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rotation), speed * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
         }
