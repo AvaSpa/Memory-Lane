@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -11,7 +10,8 @@ public class GameController : MonoBehaviour
     public Text LevelText;
     public CountDown CountDown;
     public int CurrentLevel;
-    
+    public AudioSource WinMusic;
+
     private const string CurrentLevelKey = "CurrentLevel";
     private const string MaxLevelKey = "MaxLevel";
 
@@ -20,8 +20,6 @@ public class GameController : MonoBehaviour
         CurrentLevel = PlayerPrefs.GetInt(CurrentLevelKey, 1);
         LevelText.text = $"Level: {CurrentLevel}";
     }
-
-   
 
     public void EndGame(bool fail)
     {
@@ -33,6 +31,8 @@ public class GameController : MonoBehaviour
 
     private void LevelComplete()
     {
+        WinMusic.Play();
+
         CurrentLevel++;
         PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
 
