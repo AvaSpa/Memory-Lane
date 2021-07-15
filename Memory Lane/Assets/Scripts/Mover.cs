@@ -15,6 +15,7 @@ public class Mover : MonoBehaviour
     public TileGenerator Platform;
     public AudioSource StepAudio;
     public AudioSource FallAudio;
+    public Transform PlayerVisual;
 
     public int Step = 5;
     public float Speed = 0.01f;
@@ -42,9 +43,32 @@ public class Mover : MonoBehaviour
         }
     }
 
-    internal void StartWinAnimation()
+    public void StartWinAnimation()
     {
-        //throw new System.NotImplementedException();
+        var destination = new Vector3(PlayerVisual.position.x, PlayerVisual.position.y + 2, PlayerVisual.position.z);
+        StartCoroutine(MoveUp(destination, 5));
+
+        StartCoroutine(Spin(75));
+    }
+
+    private IEnumerator MoveUp(Vector3 position, float speed = 1)
+    {
+        while (PlayerVisual.transform.position != position)
+        {
+            PlayerVisual.transform.position = Vector3.MoveTowards(PlayerVisual.transform.position, position, speed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private IEnumerator Spin(float speed = 10)
+    {
+        while (true)
+        {
+            PlayerVisual.transform.Rotate(Vector3.forward * speed * Time.deltaTime, Space.Self);
+            PlayerVisual.transform.Rotate(Vector3.left * speed * Time.deltaTime, Space.Self);
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void MoveLeft()

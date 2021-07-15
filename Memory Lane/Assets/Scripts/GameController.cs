@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     {
         WinMusic.Play();
         CameraController.ShowPlayerInDetail();
+        Mover.StartWinAnimation();
 
         CurrentLevel++;
         PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);

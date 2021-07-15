@@ -1498,7 +1498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TranslationSpeed: 15.1
   RotationSpeed: 21.5
-  PlayerVisualPosition: {fileID: 1382964122}
+  PlayerVisual: {fileID: 1382964122}
 --- !u!1 &963599000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,6 +2429,7 @@ MonoBehaviour:
   Platform: {fileID: 2101647287}
   StepAudio: {fileID: 1486444316}
   FallAudio: {fileID: 1486444317}
+  PlayerVisual: {fileID: 1382964122}
   Step: 5
   Speed: 0.01
   Position: {x: 0, y: 0}

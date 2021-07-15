@@ -8,13 +8,14 @@ namespace Assets.Scripts
         public float TranslationSpeed = 15.1f;
         public float RotationSpeed = 21.5f;
 
-        public Transform PlayerVisualPosition;
+        public Transform PlayerVisual;
 
         private Vector3 PlayViewPosition = new Vector3(20, 40, -30);
         private Vector3 PlayViewRotation = new Vector3(75, 0, 0);
         private Vector3 PlayerViewRotation = new Vector3(0, 0, 0);
 
         private const int CameraPlayerDistance = 13;
+        private const int CameraHeightDifference = 5;
 
         private void Start()
         {
@@ -24,7 +25,7 @@ namespace Assets.Scripts
 
         public void ShowPlayerInDetail()
         {
-            var playerViewPosition = new Vector3(PlayerVisualPosition.position.x, PlayerVisualPosition.position.y, PlayerVisualPosition.position.z - CameraPlayerDistance);
+            var playerViewPosition = new Vector3(PlayerVisual.position.x, PlayerVisual.position.y + CameraHeightDifference, PlayerVisual.position.z - CameraPlayerDistance);
             StartCoroutine(MoveCameraToPosition(playerViewPosition, TranslationSpeed));
             StartCoroutine(RotateCameraToPosition(PlayerViewRotation, RotationSpeed));
         }
