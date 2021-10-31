@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,27 +53,41 @@
     <UnityVersion>2021.2.0f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Scripts\RotateOnSwipe.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\LevelList.cs" />
     <Compile Include="Assets\Scripts\Mover.cs" />
     <Compile Include="Assets\Scripts\Utils\Sound.cs" />
     <Compile Include="Assets\Scripts\Enums\DirectionEnum.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Level.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\DirectionId.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\SwipeListener.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\SwipesToVectorEvents.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\Examples\MoveOnSwipe_Hexagonal.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\Examples\MoveOnSwipe_EightDirections.cs" />
     <Compile Include="Assets\Scripts\Enums\SceneEnum.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Utils\IListExtensions.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\SwipeDetectionMode.cs" />
     <Compile Include="Assets\Scripts\SceneChanger.cs" />
+    <Compile Include="Assets\Scripts\ObjectClicker.cs" />
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\VectorToDirection.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\Errors.cs" />
     <Compile Include="Assets\Scripts\ResetButtonHandler.cs" />
     <Compile Include="Assets\Scripts\ActionButtonHandler.cs" />
     <Compile Include="Assets\Scripts\TileGenerator.cs" />
     <Compile Include="Assets\Scripts\ContinueButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\Examples\MoveOnSwipe_Vector.cs" />
     <Compile Include="Assets\Scripts\CountDown.cs" />
     <Compile Include="Assets\Scripts\Spin.cs" />
+    <Compile Include="Assets\Scripts\Swipe\Scripts\DirectionPresets.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
-    <Compile Include="Assets\Scripts\ObjectClicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -715,6 +729,9 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -735,9 +752,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

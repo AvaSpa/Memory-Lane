@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
     public LevelList Levels;
-    public RectTransform UiList;
+    public RectTransform UiList; //TODO: remove
     public GameObject UiListItem;
     public SceneChanger SceneChanger;
 
@@ -25,12 +23,16 @@ public class MenuController : MonoBehaviour
 
         for (var i = 0; i < maxReachedLevel; i++)
         {
+            //TODO: instantiate correct prefab (3d model and TMP)
             var listItem = GameObject.Instantiate(UiListItem, UiList);
-            var itemText = listItem.GetComponentInChildren<Text>();
+            var itemText = listItem.GetComponentInChildren<Text>();//TODO: get TMP text
             itemText.text += i + 1;
 
+            //TODO: Just set tag with level number
             var button = listItem.GetComponent<Button>();
             var buttonLevel = i + 1;
+
+            //TODO: expose list of 3d buttons to the object clicker
             button.onClick.AddListener(() =>
             {
                 PlayerPrefs.SetInt(CurrentLevelKey, buttonLevel);
