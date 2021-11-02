@@ -6,15 +6,15 @@ public class RotateOnSwipe : MonoBehaviour
 {
     public float Speed = 100;
 
-    private bool _processingSwipe;
+    private bool _rotating;
     private Vector3 _currentEuler;
 
     //TODO: not enough; need to hook to swipe start and end events
-    public bool IsProcessingSwipe => _processingSwipe;
+    public bool IsRotating => _rotating;
 
     public void OnSwipeHandler(string id)
     {
-        if (_processingSwipe) return;
+        if (_rotating) return;
 
         switch (id)
         {
@@ -34,7 +34,7 @@ public class RotateOnSwipe : MonoBehaviour
 
     private IEnumerator Turn(bool left)
     {
-        _processingSwipe = true;
+        _rotating = true;
 
         var newAngle = left ? _currentEuler.y - 90 : _currentEuler.y + 90;
         while (_currentEuler.y != newAngle)
@@ -44,6 +44,6 @@ public class RotateOnSwipe : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        _processingSwipe = false;
+        _rotating = false;
     }
 }

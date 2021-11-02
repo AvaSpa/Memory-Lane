@@ -23,8 +23,7 @@ public class ObjectClicker : MonoBehaviour
     private void ActOnObject(Transform objectHit)
     {
         var tag = objectHit.tag;
-        //TODO: also return if 3d object is not in view
-        if (string.IsNullOrEmpty(tag) || SwipeRotator.IsProcessingSwipe) return;
+        if (string.IsNullOrEmpty(tag) || SwipeRotator.IsRotating) return;
 
         if (tag == "Play")
             Play(objectHit);
