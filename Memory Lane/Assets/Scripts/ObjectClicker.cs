@@ -4,6 +4,10 @@ public class ObjectClicker : MonoBehaviour
 {
     public Camera Camera;
     public RotateOnSwipe SwipeRotator;
+    public ScrollOnSwipe SwipeScroller;
+    public SceneChanger SceneChanger;
+
+    private const string CurrentLevelKey = "CurrentLevel";
 
     void Update()
     {
@@ -23,16 +27,24 @@ public class ObjectClicker : MonoBehaviour
     private void ActOnObject(Transform objectHit)
     {
         var tag = objectHit.tag;
-        if (string.IsNullOrEmpty(tag) || SwipeRotator.IsRotating) return;
+        if (string.IsNullOrEmpty(tag) || SwipeRotator.IsRotating || SwipeScroller.IsScrolling) return;
 
-        if (tag == "Play")
-            Play(objectHit);
-        else
+        switch (tag)
         {
-            //TODO: Get level number from generated tag and load it just like it was loaded from 2D UI
-            //PlayerPrefs.SetInt(CurrentLevelKey, buttonLevel);
-            //SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
+            case "Play":
+                Play(objectHit);
+                break;
+            case "Level":
+                LoadLevel(objectHit);
+                break;
         }
+    }
+
+    private void LoadLevel(Transform objectHit)
+    {
+        var tagger = objectHit.GetComponent<NumberTagger>();
+        PlayerPrefs.SetInt(CurrentLevelKey, tagger.Number + 1);
+        SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
     }
 
     private void Play(Transform objectHit)

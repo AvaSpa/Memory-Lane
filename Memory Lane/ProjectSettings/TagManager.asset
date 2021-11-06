@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Play
   - Levels
+  - Level
   layers:
   - Default
   - TransparentFX
