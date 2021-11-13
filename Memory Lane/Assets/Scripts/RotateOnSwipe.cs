@@ -1,13 +1,13 @@
+using DG.Tweening;
 using GG.Infrastructure.Utils.Swipe;
-using System.Collections;
 using UnityEngine;
 
 public class RotateOnSwipe : MonoBehaviour
 {
-    public float Speed = 100;
+    public float Speed = 1;
 
     private bool _rotating;
-    private Vector3 _currentEuler;
+    private Vector3 _currentEuler; //TODO: use this to determine if levels are in view in order to control the scroll
 
     //TODO: not enough; need to hook to swipe start and end events
     public bool IsRotating => _rotating;
@@ -19,30 +19,19 @@ public class RotateOnSwipe : MonoBehaviour
         switch (id)
         {
             case DirectionId.ID_LEFT:
-                StartCoroutine(Turn(true));
+                Turn(true);
                 break;
             case DirectionId.ID_RIGHT:
-                StartCoroutine(Turn(false));
+                Turn(false);
                 break;
         }
     }
 
-    private void Start()
-    {
-        _currentEuler = transform.eulerAngles;
-    }
-
-    private IEnumerator Turn(bool left)
+    private void Turn(bool left)
     {
         _rotating = true;
 
-        var newAngle = left ? _currentEuler.y - 90 : _currentEuler.y + 90;
-        while (_currentEuler.y != newAngle)
-        {
-            _currentEuler.y = Mathf.MoveTowards(_currentEuler.y, newAngle, Speed * Time.deltaTime);
-            transform.eulerAngles = _currentEuler;
-            yield return new WaitForEndOfFrame();
-        }
+        transform.DORotate(new Vector3(0, left ? -90 : 90, 0), Speed, RotateMode.LocalAxisAdd);
 
         _rotating = false;
     }

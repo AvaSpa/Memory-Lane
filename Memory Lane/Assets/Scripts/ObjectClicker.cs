@@ -43,6 +43,7 @@ public class ObjectClicker : MonoBehaviour
     private void LoadLevel(Transform objectHit)
     {
         var tagger = objectHit.GetComponent<NumberTagger>();
+        if (!tagger.ClickEnabled) return;
         PlayerPrefs.SetInt(CurrentLevelKey, tagger.Number + 1);
         SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
     }
