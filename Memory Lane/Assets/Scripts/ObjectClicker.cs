@@ -27,7 +27,7 @@ public class ObjectClicker : MonoBehaviour
     private void ActOnObject(Transform objectHit)
     {
         var tag = objectHit.tag;
-        if (string.IsNullOrEmpty(tag) || SwipeRotator.IsRotating || SwipeScroller.IsScrolling) return;
+        if (string.IsNullOrEmpty(tag)) return;
 
         switch (tag)
         {

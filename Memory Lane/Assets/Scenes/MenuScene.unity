@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.25
+  CameraSupport: {fileID: 1424730757}
 --- !u!1 &1143557738
 GameObject:
   m_ObjectHideFlags: 0
