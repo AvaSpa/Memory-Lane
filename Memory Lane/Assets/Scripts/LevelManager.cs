@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 
         for (var i = 0; i < maxReachedLevel; i++)
         {
-            var listItem = GameObject.Instantiate(ListItem, ButtonContainer, false); //TODO: it's not instantiated in the right place
+            var listItem = GameObject.Instantiate(ListItem, ButtonContainer, false);
             var position = listItem.transform.position;
             listItem.transform.position = new Vector3(position.x, position.y + buttonOffset - i * 10, position.z);
 

@@ -7,7 +7,7 @@ public class ScrollOnSwipe : MonoBehaviour
     public float Speed = 0.25f;
     public Transform CameraSupport;
 
-    private Vector3 _currentPosition; //TODO: use this to control the bounds of the scroll
+    private const string MaxLevelKey = "MaxLevel";
 
     public void OnSwipeHandler(string id)
     {
@@ -17,9 +17,15 @@ public class ScrollOnSwipe : MonoBehaviour
         switch (id)
         {
             case DirectionId.ID_UP:
+                var maxReachedLevel = PlayerPrefs.GetInt(MaxLevelKey, 1);
+                var maxIsEven = maxReachedLevel % 2 == 0;
+                var limit = -1 * (20 - maxReachedLevel * 10) - (maxIsEven ? 20 : 40);
+                if (transform.position.y >= limit) return;
+
                 Move(true);
                 break;
             case DirectionId.ID_DOWN:
+                if (transform.position.y == 0) return;
                 Move(false);
                 break;
         }
