@@ -34,7 +34,7 @@ public class ObjectClicker : MonoBehaviour
             case "Play":
                 Play(objectHit);
                 break;
-            case "Level":
+            case "LevelAction":
                 LoadLevel(objectHit);
                 break;
         }

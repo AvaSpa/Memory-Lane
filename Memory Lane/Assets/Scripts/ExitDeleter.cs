@@ -20,7 +20,7 @@ public class ExitDeleter : MonoBehaviour
 
         if (tag.Contains("Level"))
         {
-            var script = collision.gameObject.GetComponent<NumberTagger>();
+            var script = collision.gameObject.GetComponentInChildren<NumberTagger>();
             script.ClickEnabled = enabled;
         }
     }

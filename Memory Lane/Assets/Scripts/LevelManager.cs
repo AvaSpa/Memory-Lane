@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
             var itemText = listItem.GetComponentInChildren<TextMeshPro>();
             itemText.text += i + 1;
 
-            var tagger = ListItem.GetComponent<NumberTagger>();
+            var tagger = ListItem.GetComponentInChildren<NumberTagger>();
             tagger.Number = i + 1;
         }
     }
