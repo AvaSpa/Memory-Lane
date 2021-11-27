@@ -33,6 +33,15 @@ public class LevelManager : MonoBehaviour
 
             var tagger = ListItem.GetComponentInChildren<NumberTagger>();
             tagger.Number = i + 1;
+
+            SetVisibility(listItem, i);
         }
+    }
+
+    private void SetVisibility(GameObject listItem, int index)
+    {
+        var enabler = GetComponentInChildren<LevelButtonEnabler>();
+
+        if (index > 4) enabler.SetEnabled(listItem, false);
     }
 }
