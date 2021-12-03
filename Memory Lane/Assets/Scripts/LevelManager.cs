@@ -27,9 +27,6 @@ public class LevelManager : MonoBehaviour
         for (var i = 0; i < maxReachedLevel; i++)
         {
             var prefabIndex = i % ListItems.Length;
-
-            Debug.Log($"Index: {prefabIndex}");
-
             var prefab = ListItems[prefabIndex];
 
             var listItem = GameObject.Instantiate(prefab, ButtonContainer, false);
