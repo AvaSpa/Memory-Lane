@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
             var itemText = listItem.GetComponentInChildren<TextMeshPro>();
             itemText.text += i + 1;
 
-            var levelButtonHandler = prefab.GetComponentInChildren<LevelButtonHandler>();
+            var levelButtonHandler = listItem.GetComponentInChildren<LevelButtonHandler>();
             levelButtonHandler.LevelNumber = i + 1;
             levelButtonHandler.SwipeScroller = SwipeScroller;
             levelButtonHandler.SceneChanger = SceneChanger;

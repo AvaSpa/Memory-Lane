@@ -21,7 +21,7 @@ public class LevelButtonHandler : ClickAction
     {
         if (!ClickEnabled) return;
 
-        PlayerPrefs.SetInt(CurrentLevelKey, LevelNumber + 1);
+        PlayerPrefs.SetInt(CurrentLevelKey, LevelNumber);
         SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
     }
 }
