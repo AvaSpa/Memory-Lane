@@ -8,7 +8,7 @@ public class ScrollOnSwipe : MonoBehaviour
     public Transform CameraSupport;
 
     [HideInInspector]
-    public bool IsMoving => DOTween.IsTweening(transform, true);
+    public bool IsMoving => transform != null && DOTween.IsTweening(transform, true);
 
     private const string MaxLevelKey = "MaxLevel";
 
