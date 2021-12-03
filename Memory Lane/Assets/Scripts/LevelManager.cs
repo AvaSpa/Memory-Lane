@@ -4,7 +4,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public LevelList Levels;
-    public GameObject ListItem;
+    public GameObject[] ListItems;
     public Transform ButtonContainer;
     public ScrollOnSwipe SwipeScroller;
     public SceneChanger SceneChanger;
@@ -26,14 +26,20 @@ public class LevelManager : MonoBehaviour
 
         for (var i = 0; i < maxReachedLevel; i++)
         {
-            var listItem = GameObject.Instantiate(ListItem, ButtonContainer, false);
+            var prefabIndex = i % ListItems.Length;
+
+            Debug.Log($"Index: {prefabIndex}");
+
+            var prefab = ListItems[prefabIndex];
+
+            var listItem = GameObject.Instantiate(prefab, ButtonContainer, false);
             var position = listItem.transform.position;
             listItem.transform.position = new Vector3(position.x, position.y + buttonOffset - i * 10, position.z);
 
             var itemText = listItem.GetComponentInChildren<TextMeshPro>();
             itemText.text += i + 1;
 
-            var levelButtonHandler = ListItem.GetComponentInChildren<LevelButtonHandler>();
+            var levelButtonHandler = prefab.GetComponentInChildren<LevelButtonHandler>();
             levelButtonHandler.LevelNumber = i + 1;
             levelButtonHandler.SwipeScroller = SwipeScroller;
             levelButtonHandler.SceneChanger = SceneChanger;
