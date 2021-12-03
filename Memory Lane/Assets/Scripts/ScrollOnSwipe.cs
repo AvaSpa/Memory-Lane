@@ -7,6 +7,9 @@ public class ScrollOnSwipe : MonoBehaviour
     public float Speed = 0.25f;
     public Transform CameraSupport;
 
+    [HideInInspector]
+    public bool IsMoving => DOTween.IsTweening(transform, true);
+
     private const string MaxLevelKey = "MaxLevel";
 
     public void OnSwipeHandler(string id)
@@ -35,6 +38,7 @@ public class ScrollOnSwipe : MonoBehaviour
     {
         var currentPos = transform.position;
         var newY = up ? currentPos.y + 20 : currentPos.y - 20;
+
         transform.DOMove(new Vector3(currentPos.x, newY, currentPos.z), Speed, true);
     }
 }

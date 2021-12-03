@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Level.cs" />
     <Compile Include="Assets\Scripts\ScrollOnSwipe.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\NumberTagger.cs" />
+    <Compile Include="Assets\Scripts\LevelButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\DirectionId.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\SwipeListener.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\SwipesToVectorEvents.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Assets\Scripts\Utils\IListExtensions.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\SwipeDetectionMode.cs" />
     <Compile Include="Assets\Scripts\SceneChanger.cs" />
-    <Compile Include="Assets\Scripts\ObjectClicker.cs" />
+    <Compile Include="Assets\Scripts\ClickAction.cs" />
     <Compile Include="Assets\Scripts\LevelButtonEnabler.cs" />
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\VectorToDirection.cs" />

@@ -680,7 +680,6 @@ GameObject:
   - component: {fileID: 1009881142}
   - component: {fileID: 1009881141}
   - component: {fileID: 1009881140}
-  - component: {fileID: 1009881143}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -754,22 +753,6 @@ Transform:
   m_Father: {fileID: 1424730757}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
---- !u!114 &1009881143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009881139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e076f3734646b1c4186abba968050d91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 1009881141}
-  SwipeRotator: {fileID: 1424730758}
-  SwipeScroller: {fileID: 1069536584}
-  SceneChanger: {fileID: 484071277}
 --- !u!1 &1069536582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +1384,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1623455865
 PrefabInstance:
@@ -1647,6 +1630,8 @@ MonoBehaviour:
   ListItem: {fileID: 1347245485274585981, guid: cf51ac01951c63541a3f386e41d3fe3e,
     type: 3}
   ButtonContainer: {fileID: 1069536583}
+  SwipeScroller: {fileID: 1069536584}
+  SceneChanger: {fileID: 484071277}
 --- !u!1 &2114222463
 GameObject:
   m_ObjectHideFlags: 0

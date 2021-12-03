@@ -1,11 +1,14 @@
-using UnityEngine;
-
-public class ContinueButtonHandler : MonoBehaviour
+public class ContinueButtonHandler : ClickAction
 {
     public SceneChanger SceneChanger;
 
-    public void Continue()
+    private void Continue()
     {
         SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
+    }
+
+    protected override void Act()
+    {
+        Continue();
     }
 }

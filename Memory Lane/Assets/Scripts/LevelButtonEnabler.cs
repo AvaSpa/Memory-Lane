@@ -24,7 +24,7 @@ public class LevelButtonEnabler : MonoBehaviour
 
         if (tag.Contains("Level"))
         {
-            var script = gameObject.GetComponentInChildren<NumberTagger>();
+            var script = gameObject.GetComponentInChildren<LevelButtonHandler>();
             script.ClickEnabled = enabled;
         }
     }

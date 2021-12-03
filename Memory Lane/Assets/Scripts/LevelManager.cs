@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour
     public LevelList Levels;
     public GameObject ListItem;
     public Transform ButtonContainer;
+    public ScrollOnSwipe SwipeScroller;
+    public SceneChanger SceneChanger;
 
     private const string CurrentLevelKey = "CurrentLevel";
     private const string MaxLevelKey = "MaxLevel";
@@ -31,8 +33,10 @@ public class LevelManager : MonoBehaviour
             var itemText = listItem.GetComponentInChildren<TextMeshPro>();
             itemText.text += i + 1;
 
-            var tagger = ListItem.GetComponentInChildren<NumberTagger>();
-            tagger.Number = i + 1;
+            var levelButtonHandler = ListItem.GetComponentInChildren<LevelButtonHandler>();
+            levelButtonHandler.LevelNumber = i + 1;
+            levelButtonHandler.SwipeScroller = SwipeScroller;
+            levelButtonHandler.SceneChanger = SceneChanger;
 
             SetVisibility(listItem, i);
         }
