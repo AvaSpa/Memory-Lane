@@ -2159,7 +2159,7 @@ MonoBehaviour:
   FallAudio: {fileID: 1486444317}
   PlayerVisual: {fileID: 1382964122}
   Step: 5
-  Speed: 0.01
+  Speed: 0.005
   Position: {x: 0, y: 0}
 --- !u!4 &1486444314
 Transform:
