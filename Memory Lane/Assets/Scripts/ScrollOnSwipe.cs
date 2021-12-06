@@ -7,9 +7,6 @@ public class ScrollOnSwipe : MonoBehaviour
     public float Speed = 0.25f;
     public Transform CameraSupport;
 
-    [HideInInspector]
-    public bool IsMoving => transform != null && DOTween.IsTweening(transform, true);
-
     private const string MaxLevelKey = "MaxLevel";
 
     public void OnSwipeHandler(string id)

@@ -8,6 +8,8 @@ public class RotateOnSwipe : MonoBehaviour
 
     public void OnSwipeHandler(string id)
     {
+        if (transform != null && DOTween.IsTweening(transform, true)) return;
+
         switch (id)
         {
             case DirectionId.ID_LEFT:
