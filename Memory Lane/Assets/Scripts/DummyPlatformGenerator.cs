@@ -16,5 +16,7 @@ public class DummyPlatformGenerator : MonoBehaviour
     private void DoneCallback()
     {
         TileGenerator.HideLane();
+
+        transform.position = new Vector3(-40, -120, 0); //weird how this is needed
     }
 }
