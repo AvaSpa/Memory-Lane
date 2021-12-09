@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class TileGenerator : MonoBehaviour
 {
@@ -21,13 +21,18 @@ public class TileGenerator : MonoBehaviour
     public LevelList Levels;
     public SceneChanger SceneChanger;
 
+    [HideInInspector]
+    public UnityEvent DoneGenerating;
+
     void Start()
     {
         tiles = new GameObject[GridWidth, GridHeight];
 
-        LoadLevel(GameController.CurrentLevel);
+        if (GameController != null)
+            LoadLevel(GameController.CurrentLevel);
 
         GenerateTiles();
+        DoneGenerating?.Invoke();
     }
 
     private void LoadLevel(int currentLevel)
@@ -93,6 +98,8 @@ public class TileGenerator : MonoBehaviour
 
     private void InitializeMoverPosition()
     {
+        if (Mover == null) return;
+
         var firstTileCoordinates = _lane.FirstOrDefault();
         var firstTile = tiles[(int)firstTileCoordinates.x, (int)firstTileCoordinates.y];
 
@@ -143,7 +150,7 @@ public class TileGenerator : MonoBehaviour
         return colors[index];
     }
 
-    public void GenerateTiles()
+    private void GenerateTiles()
     {
         for (var i = 0; i < GridWidth; i++)
         {
@@ -177,6 +184,7 @@ public class TileGenerator : MonoBehaviour
             tileScript.UpdateVisuals();
         }
 
+        if (_lane.Count == 0) return;
         var firstTileScript = GetTileScript(_lane.First());
         firstTileScript.Color = Color.white;
         firstTileScript.UpdateVisuals();
@@ -185,7 +193,7 @@ public class TileGenerator : MonoBehaviour
         lastTileScript.Color = Color.black;
         lastTileScript.UpdateVisuals();
 
-        RestoreTiles();
+        RestoreTiles(); //TODO: needed?
     }
 
     public Tile GetTileScript(float i, float j)
@@ -199,6 +207,6 @@ public class TileGenerator : MonoBehaviour
             return null;
 
         var tile = tiles[(int)coordinates.x, (int)coordinates.y];
-        return tile.GetComponent<Tile>();
+        return tile?.GetComponent<Tile>();
     }
 }
