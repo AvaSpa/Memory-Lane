@@ -48,11 +48,9 @@ public class ActionButtonHandler : MonoBehaviour
         var candidateTiles = list.Where(t => t != null && t.Color == Color);
         var correctTile = candidateTiles.FirstOrDefault(t => t.IsLane && !t.IsLocked);
 
-        if (correctTile == null) correctTile = candidateTiles.FirstOrDefault();
+        if (correctTile == null) correctTile = candidateTiles.FirstOrDefault(t => !t.IsLocked);
 
         if (correctTile == null) return Direction.None;
-
-        if (correctTile.IsLocked) return Direction.None;
 
         switch (list.IndexOf(correctTile))
         {
