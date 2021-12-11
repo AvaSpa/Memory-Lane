@@ -56,7 +56,6 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DummyPlatformGenerator.cs" />
     <Compile Include="Assets\Scripts\RotateOnSwipe.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\LevelList.cs" />
     <Compile Include="Assets\Scripts\Mover.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Assets\Scripts\Swipe\Scripts\Examples\MoveOnSwipe_EightDirections.cs" />
     <Compile Include="Assets\Scripts\Enums\SceneEnum.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\DummyTileGenerator.cs" />
     <Compile Include="Assets\Scripts\Utils\IListExtensions.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\SwipeDetectionMode.cs" />
     <Compile Include="Assets\Scripts\SceneChanger.cs" />
