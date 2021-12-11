@@ -31,10 +31,11 @@ namespace Assets.Scripts
                 {
                     var position = new Vector3(StartingX + i * 4, 0, StartingZ - j * 4);
 
-                    GameObject tile = null;
+                    GameObject tile;
                     if (tiles[i, j] == null)
                     {
-                        tile = Instantiate(TileTemplate, position, Quaternion.identity, transform);
+                        tile = Instantiate(TileTemplate, transform, false);
+                        tile.transform.localPosition = position;
                         tiles[i, j] = tile;
                     }
                     else
