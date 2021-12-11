@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -36,15 +37,15 @@ namespace Assets.Scripts.ScriptableObjects
                         var y = int.Parse(pointSplit[1]);
                         var tileVector = new Vector2(x, y);
 
-                        if (lastTile.x < 0 || tileVector.x == lastTile.x || tileVector.y == lastTile.y)
-                        {
-                            level.Tiles.Add(tileVector);
-                            lastTile = tileVector;
-                        }
-                        else
-                        {
+                        var existingTile = level.Tiles.FirstOrDefault(t => t == tileVector);
+                        if (existingTile != new Vector2())
+                            throw new Exception($"{tileVector} already exists. It must be wrong");
+
+                        if (lastTile.x >= 0 && tileVector.x != lastTile.x && tileVector.y != lastTile.y)
                             throw new Exception($"No continuity between {lastTile} and {tileVector}");
-                        }
+
+                        level.Tiles.Add(tileVector);
+                        lastTile = tileVector;
                     }
                 }
                 catch (Exception e)
@@ -61,6 +62,8 @@ namespace Assets.Scripts.ScriptableObjects
 
             AssetDatabase.CreateAsset(list, "Assets/Levels/LevelList.asset");
             AssetDatabase.SaveAssets();
+
+            Debug.Log("Levels imported successfully");
         }
     }
 }
