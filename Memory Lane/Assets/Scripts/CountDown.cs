@@ -40,9 +40,13 @@ public class CountDown : MonoBehaviour
             if (timer <= 0)
             {
                 Platform.HideLane();
+
                 UiLabel.text = string.Empty;
                 Panel.SetActive(true);
-                TutorialController.ShowSecondMessage();
+
+                if (GameController.CurrentLevel == 1)
+                    TutorialController.ShowSecondMessage();
+
                 shouldUpdate = false;
             }
         }

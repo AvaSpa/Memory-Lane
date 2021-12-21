@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public int CurrentLevel;
     public AudioSource WinMusic;
     public CameraController CameraController;
+    public GameObject EndMessage;
 
     private const string CurrentLevelKey = "CurrentLevel";
     private const string MaxLevelKey = "MaxLevel";
@@ -46,11 +47,20 @@ public class GameController : MonoBehaviour
 
         PlayerPrefs.Save();
 
+        Panel.SetActive(false);
+
+        if (CurrentLevel > Platform.Levels.Levels.Count)
+        {
+            EndMessage.SetActive(true);
+            CurrentLevel--;
+            PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
+            return;
+        }
+
         var buttonScript = ResetButton.GetComponent<ResetButtonHandler>();
         buttonScript.Next.SetActive(true);
         buttonScript.Restart.SetActive(false);
 
-        Panel.SetActive(false);
         ResetButton.SetActive(true);
     }
 

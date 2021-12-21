@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TileGenerator : MonoBehaviour
 {
@@ -25,17 +24,24 @@ public class TileGenerator : MonoBehaviour
     {
         tiles = new GameObject[GridWidth, GridHeight];
 
-        LoadLevel(GameController.CurrentLevel);
+        var loaded = LoadLevel(GameController.CurrentLevel);
+        if (!loaded) return;
 
         GenerateTiles();
     }
 
-    private void LoadLevel(int currentLevel)
+    private bool LoadLevel(int currentLevel)
     {
         if (Levels.Levels.Count >= currentLevel)
+        {
             _lane = Levels.Levels[currentLevel - 1].Tiles;
+            return true;
+        }
         else
+        {
             SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Menu);
+            return false;
+        }
     }
 
     public void HideLane()
