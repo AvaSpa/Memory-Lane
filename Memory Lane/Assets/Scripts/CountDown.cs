@@ -7,6 +7,8 @@ public class CountDown : MonoBehaviour
     public Mover Mover;
     public Text UiLabel;
     public GameObject Panel;
+    public GameController GameController;
+    public TutorialController TutorialController;
 
     public float Duration = 5;
 
@@ -20,7 +22,11 @@ public class CountDown : MonoBehaviour
 
     public void Initialize()
     {
-        timer = Duration;
+        if (GameController.CurrentLevel == 1)
+            timer = 10;
+        else
+            timer = Duration;
+
         shouldUpdate = true;
     }
 
@@ -36,6 +42,7 @@ public class CountDown : MonoBehaviour
                 Platform.HideLane();
                 UiLabel.text = string.Empty;
                 Panel.SetActive(true);
+                TutorialController.ShowSecondMessage();
                 shouldUpdate = false;
             }
         }

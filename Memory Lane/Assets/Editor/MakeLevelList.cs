@@ -16,6 +16,8 @@ namespace Assets.Scripts.ScriptableObjects
             AssetDatabase.CreateFolder("Assets", "Levels");
             AssetDatabase.SaveAssets();
 
+            Debug.ClearDeveloperConsole();
+
             var list = ScriptableObject.CreateInstance<LevelList>();
             list.Levels = new List<Level>();
 
