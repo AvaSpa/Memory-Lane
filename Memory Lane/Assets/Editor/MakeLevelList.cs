@@ -9,6 +9,8 @@ namespace Assets.Scripts.ScriptableObjects
 {
     public class MakeLevelList
     {
+        private const int MaxCoordinateValue = 8;
+
         [MenuItem("Assets/Create/Level List", false, 0)]
         public static void CreateLevelList()
         {
@@ -45,6 +47,9 @@ namespace Assets.Scripts.ScriptableObjects
 
                         if (lastTile.x >= 0 && tileVector.x != lastTile.x && tileVector.y != lastTile.y)
                             throw new Exception($"No continuity between {lastTile} and {tileVector}");
+
+                        if (tileVector.x > MaxCoordinateValue || tileVector.y > MaxCoordinateValue)
+                            throw new Exception($"Coordinates out of bounds: {tileVector}");
 
                         level.Tiles.Add(tileVector);
                         lastTile = tileVector;
