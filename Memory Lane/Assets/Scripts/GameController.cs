@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
             EndMessage.SetActive(true);
             CurrentLevel--;
             PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
+            PlayerPrefs.SetInt(MaxLevelKey, currentMaxLevel);
             return;
         }
 
