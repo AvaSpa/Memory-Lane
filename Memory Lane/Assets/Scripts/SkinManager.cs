@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkinManager : MonoBehaviour
@@ -5,6 +6,8 @@ public class SkinManager : MonoBehaviour
     public GameObject[] ListItems;
     public Transform ButtonContainer;
     public GameObject SkinButtonPrefab;
+
+    private List<SkinButtonHandler> _skinButtons = new List<SkinButtonHandler>();
 
     private void Start()
     {
@@ -14,12 +17,14 @@ public class SkinManager : MonoBehaviour
         {
             var listItem = GameObject.Instantiate(SkinButtonPrefab, ButtonContainer, false);
             var position = listItem.transform.position;
-            //TODO: tweak position and offset
-            listItem.transform.position = new Vector3(position.x, position.y + buttonOffset - i * 10, position.z);
+
+            listItem.transform.position = new Vector3(position.x, position.y + buttonOffset - i * 15, position.z);
 
             var skinButtonHandler = listItem.GetComponent<SkinButtonHandler>();
             skinButtonHandler.SkinId = i;
             skinButtonHandler.PossibleSkins = ListItems;
+            skinButtonHandler.SkinManager = this;
+            _skinButtons.Add(skinButtonHandler);
 
             SetVisibility(listItem, i);
         }
@@ -29,6 +34,12 @@ public class SkinManager : MonoBehaviour
     {
         var enabler = GetComponentInChildren<ButtonEnabler>();
 
-        if (index > 4) enabler.SetEnabled(listItem, false);
+        if (index > 4) enabler.SetEnabled(listItem, false); //TODO: tweak the 4
+    }
+
+    public void MarkSelectedSkin(int selectedId)
+    {
+        foreach (var skin in _skinButtons)
+            skin.ToggleSelected(skin.SkinId == selectedId);
     }
 }

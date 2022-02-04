@@ -1,3 +1,4 @@
+using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
 
@@ -48,25 +49,14 @@ public class Mover : MonoBehaviour
         var destination = new Vector3(PlayerVisual.position.x, PlayerVisual.position.y + 2, PlayerVisual.position.z);
         StartCoroutine(MoveUp(destination, 5));
 
-        StartCoroutine(Spin(75));
+        StartCoroutine(SpinHelper.WinSpin(PlayerVisual, 75));
     }
 
     private IEnumerator MoveUp(Vector3 position, float speed = 1)
     {
-        while (PlayerVisual.transform.position != position)
+        while (PlayerVisual.position != position)
         {
-            PlayerVisual.transform.position = Vector3.MoveTowards(PlayerVisual.transform.position, position, speed * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
-    private IEnumerator Spin(float speed = 10)
-    {
-        while (true)
-        {
-            PlayerVisual.transform.Rotate(Vector3.forward * speed * Time.deltaTime, Space.Self);
-            PlayerVisual.transform.Rotate(Vector3.left * speed * Time.deltaTime, Space.Self);
-
+            PlayerVisual.position = Vector3.MoveTowards(PlayerVisual.transform.position, position, speed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
     }
