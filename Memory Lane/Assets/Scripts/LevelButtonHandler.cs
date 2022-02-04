@@ -3,10 +3,7 @@ using UnityEngine;
 public class LevelButtonHandler : ClickAction
 {
     public int LevelNumber;
-    public bool ClickEnabled = true;
 
-    [HideInInspector]
-    public ScrollOnSwipe SwipeScroller;
     [HideInInspector]
     public SceneChanger SceneChanger;
 
@@ -19,8 +16,6 @@ public class LevelButtonHandler : ClickAction
 
     private void LoadLevel()
     {
-        if (!ClickEnabled) return;
-
         PlayerPrefs.SetInt(CurrentLevelKey, LevelNumber);
         SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
     }

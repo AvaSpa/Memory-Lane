@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8570283471004260994}
   - component: {fileID: 5107832410004337458}
+  - component: {fileID: 8865211823497614843}
+  - component: {fileID: 6013157848356386567}
   m_Layer: 0
   m_Name: LevelButton3
   m_TagString: Level
@@ -30,7 +32,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6262954111883376506}
-  - {fileID: 2708227585114552780}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,6 +48,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 30, y: 4, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &8865211823497614843
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347245485274585981}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30, y: 4, z: 0.5}
+  m_Center: {x: 0, y: 0, z: -2}
+--- !u!114 &6013157848356386567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347245485274585981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f720347a034c2ad4d979c09ed6e82a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClickEnabled: 1
+  LevelNumber: 0
+  SceneChanger: {fileID: 0}
 --- !u!1 &1688301749174023469
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,68 +281,6 @@ Transform:
   m_Father: {fileID: 8570283471004260994}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6468932516320771968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2708227585114552780}
-  - component: {fileID: 4135837406599982750}
-  - component: {fileID: 8614168181822906193}
-  m_Layer: 0
-  m_Name: Action
-  m_TagString: LevelAction
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2708227585114552780
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468932516320771968}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8570283471004260994}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4135837406599982750
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468932516320771968}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 30, y: 4, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8614168181822906193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468932516320771968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f720347a034c2ad4d979c09ed6e82a5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelNumber: 0
-  ClickEnabled: 1
-  SwipeScroller: {fileID: 0}
-  SceneChanger: {fileID: 0}
 --- !u!1001 &4620247681270899000
 PrefabInstance:
   m_ObjectHideFlags: 0

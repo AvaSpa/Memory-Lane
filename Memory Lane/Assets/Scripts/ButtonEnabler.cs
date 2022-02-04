@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class LevelButtonEnabler : MonoBehaviour
+public class ButtonEnabler : MonoBehaviour
 {
+    public string TagToHandle;
+
     public void SetEnabled(GameObject gameObject, bool enabled)
     {
         ToggleVisual(gameObject, enabled);
@@ -22,18 +24,19 @@ public class LevelButtonEnabler : MonoBehaviour
     {
         var tag = gameObject.tag;
 
-        if (tag.Contains("Level"))
+        if (tag.Contains(TagToHandle))
         {
-            var script = gameObject.GetComponentInChildren<LevelButtonHandler>();
+            var script = gameObject.GetComponent<ClickAction>();
+
             script.ClickEnabled = enabled;
         }
     }
 
-    private static void ToggleVisual(GameObject gameObject, bool visible)
+    private void ToggleVisual(GameObject gameObject, bool visible)
     {
         var tag = gameObject.tag;
 
-        if (tag.Contains("Level"))
+        if (tag.Contains(TagToHandle))
         {
             var visual = gameObject.transform.GetChild(0).gameObject;
             visual.SetActive(visible);

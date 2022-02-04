@@ -6,7 +6,6 @@ public class LevelManager : MonoBehaviour
     public LevelList Levels;
     public GameObject[] ListItems;
     public Transform ButtonContainer;
-    public ScrollOnSwipe SwipeScroller;
     public SceneChanger SceneChanger;
 
     private const string CurrentLevelKey = "CurrentLevel";
@@ -36,9 +35,8 @@ public class LevelManager : MonoBehaviour
             var itemText = listItem.GetComponentInChildren<TextMeshPro>();
             itemText.text += i + 1;
 
-            var levelButtonHandler = listItem.GetComponentInChildren<LevelButtonHandler>();
+            var levelButtonHandler = listItem.GetComponent<LevelButtonHandler>();
             levelButtonHandler.LevelNumber = i + 1;
-            levelButtonHandler.SwipeScroller = SwipeScroller;
             levelButtonHandler.SceneChanger = SceneChanger;
 
             SetVisibility(listItem, i);
@@ -47,7 +45,7 @@ public class LevelManager : MonoBehaviour
 
     private void SetVisibility(GameObject listItem, int index)
     {
-        var enabler = GetComponentInChildren<LevelButtonEnabler>();
+        var enabler = GetComponentInChildren<ButtonEnabler>();
 
         if (index > 4) enabler.SetEnabled(listItem, false);
     }
