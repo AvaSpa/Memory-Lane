@@ -60,7 +60,7 @@
     <Compile Include="Assets\Scripts\Utils\Sound.cs" />
     <Compile Include="Assets\Scripts\Enums\DirectionEnum.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Level.cs" />
-    <Compile Include="Assets\Scripts\ScrollOnSwipe.cs" />
+    <Compile Include="Assets\Scripts\LevelScroller.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LevelButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\DirectionId.cs" />
@@ -87,13 +87,14 @@
     <Compile Include="Assets\Scripts\TileGenerator.cs" />
     <Compile Include="Assets\Scripts\ContinueButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\Examples\MoveOnSwipe_Vector.cs" />
+    <Compile Include="Assets\Scripts\Utils\SpinHelper.cs" />
     <Compile Include="Assets\Scripts\CountDown.cs" />
     <Compile Include="Assets\Scripts\Spin.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\DirectionPresets.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
-    <Compile Include="Assets\Scripts\Utils\SpinHelper.cs" />
+    <Compile Include="Assets\Scripts\SkinScroller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

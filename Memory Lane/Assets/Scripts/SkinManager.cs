@@ -34,7 +34,7 @@ public class SkinManager : MonoBehaviour
     {
         var enabler = GetComponentInChildren<ButtonEnabler>();
 
-        if (index > 4) enabler.SetEnabled(listItem, false); //TODO: tweak the 4
+        if (index > 3) enabler.SetEnabled(listItem, false);
     }
 
     public void MarkSelectedSkin(int selectedId)

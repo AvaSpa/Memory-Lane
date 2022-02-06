@@ -2,24 +2,23 @@ using DG.Tweening;
 using GG.Infrastructure.Utils.Swipe;
 using UnityEngine;
 
-public class ScrollOnSwipe : MonoBehaviour
+public class SkinScroller : MonoBehaviour
 {
     public float Speed = 0.25f;
     public Transform CameraSupport;
-
-    private const string MaxLevelKey = "MaxLevel";
+    public SkinManager SkinManager;
 
     public void OnSwipeHandler(string id)
     {
         var cameraSupportRotation = CameraSupport.rotation.eulerAngles;
-        if (cameraSupportRotation.y + 0.01f < 270f || cameraSupportRotation.y - 0.1f > 270) return;
+        if (cameraSupportRotation.y + 0.01f < 180f || cameraSupportRotation.y - 0.1f > 180f) return;
 
         switch (id)
         {
             case DirectionId.ID_UP:
-                var maxReachedLevel = PlayerPrefs.GetInt(MaxLevelKey, 1);
-                var maxIsEven = maxReachedLevel % 2 == 0;
-                var limit = -1 * (20 - maxReachedLevel * 10) - (maxIsEven ? 20 : 40);
+                var skinCount = SkinManager.ListItems.Length;
+                var maxIsEven = skinCount % 2 == 0;
+                var limit = -1 * (20 - skinCount * 15) - (maxIsEven ? 20 : 40);
                 if (transform.position.y >= limit) return;
 
                 Move(true);

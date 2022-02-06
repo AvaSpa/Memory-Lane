@@ -578,13 +578,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3511854828312037847, guid: c7a30fbed4347a144a4995a74628cfc1,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3511854828312037847, guid: c7a30fbed4347a144a4995a74628cfc1,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3511854828312037847, guid: c7a30fbed4347a144a4995a74628cfc1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -33
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 3511854828312037847, guid: c7a30fbed4347a144a4995a74628cfc1,
         type: 3}
@@ -1679,6 +1684,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2104428941}
+        m_TargetAssemblyTypeName: SkinScroller, Assembly-CSharp
+        m_MethodName: OnSwipeHandler
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _sensetivity: 10
   _continuousDetection: 0
   _swipeDetectionMode: 2
@@ -2171,7 +2188,7 @@ PrefabInstance:
     - target: {fileID: 3511854828312037847, guid: c7a30fbed4347a144a4995a74628cfc1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 33
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3511854828312037847, guid: c7a30fbed4347a144a4995a74628cfc1,
         type: 3}
@@ -2413,8 +2430,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104428939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200b66f387c55f346b91de6274010305, type: 3}
+  m_Script: {fileID: 11500000, guid: f3d1d714869d12141a9df846a4e65043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.25
   CameraSupport: {fileID: 1424730757}
+  SkinManager: {fileID: 1601223733}
