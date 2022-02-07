@@ -16,7 +16,7 @@ public class SkinScroller : MonoBehaviour
         switch (id)
         {
             case DirectionId.ID_UP:
-                var skinCount = SkinManager.ListItems.Length;
+                var skinCount = SkinManager.Skins.Skins.Count;
                 var maxIsEven = skinCount % 2 == 0;
                 var limit = -1 * (20 - skinCount * 15) - (maxIsEven ? 20 : 40);
                 if (transform.position.y >= limit) return;

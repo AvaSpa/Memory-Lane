@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\ExitButtonHandler.cs" />
     <Compile Include="Assets\Scripts\SkinButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\VectorToDirection.cs" />
+    <Compile Include="Assets\Scripts\SkinScroller.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\Errors.cs" />
     <Compile Include="Assets\Scripts\TutorialController.cs" />
     <Compile Include="Assets\Scripts\ResetButtonHandler.cs" />
@@ -94,7 +95,8 @@
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
-    <Compile Include="Assets\Scripts\SkinScroller.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Skin.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\SkinList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

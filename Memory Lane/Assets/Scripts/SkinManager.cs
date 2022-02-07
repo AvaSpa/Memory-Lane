@@ -1,19 +1,22 @@
+using Assets.Scripts.ScriptableObjects;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SkinManager : MonoBehaviour
 {
-    public GameObject[] ListItems;
+    public SkinList Skins;
     public Transform ButtonContainer;
     public GameObject SkinButtonPrefab;
 
     private List<SkinButtonHandler> _skinButtons = new List<SkinButtonHandler>();
 
+    private const string CurrentSkinKey = "CurrentSkin";
+
     private void Start()
     {
         const int buttonOffset = 20;
 
-        for (var i = 0; i < ListItems.Length; i++)
+        for (var i = 0; i < Skins.Skins.Count; i++)
         {
             var listItem = GameObject.Instantiate(SkinButtonPrefab, ButtonContainer, false);
             var position = listItem.transform.position;
@@ -22,12 +25,15 @@ public class SkinManager : MonoBehaviour
 
             var skinButtonHandler = listItem.GetComponent<SkinButtonHandler>();
             skinButtonHandler.SkinId = i;
-            skinButtonHandler.PossibleSkins = ListItems;
+            skinButtonHandler.Skins = Skins;
             skinButtonHandler.SkinManager = this;
             _skinButtons.Add(skinButtonHandler);
 
             SetVisibility(listItem, i);
         }
+
+        var currentSkinId = PlayerPrefs.GetInt(CurrentSkinKey, 0);
+        MarkSelectedSkin(currentSkinId);
     }
 
     private void SetVisibility(GameObject listItem, int index)

@@ -1777,14 +1777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fafa6fae32467e448cac31c65033084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ListItems:
-  - {fileID: 919132149155446097, guid: 02f1d744b23c0f347a91b89eded54c52, type: 3}
-  - {fileID: 919132149155446097, guid: dc74b33f2ac7a0f49bb7a0e2f43268dd, type: 3}
-  - {fileID: 919132149155446097, guid: 5f03f58e7c4b4504081e2ce014645c6c, type: 3}
-  - {fileID: 919132149155446097, guid: 999c1aec8efa477439d6e42e0a3d750b, type: 3}
-  - {fileID: 919132149155446097, guid: 72368bf9f011ec14da37d4bbced83606, type: 3}
-  - {fileID: 919132149155446097, guid: 569b34e25e8a0d24eb2ae953efb98d62, type: 3}
-  - {fileID: 919132149155446097, guid: c15b647e5b6eb0645b4e1146aa1c1f34, type: 3}
+  Skins: {fileID: 11400000, guid: d32cce909d7fad24cb28065bf8c4b93b, type: 2}
   ButtonContainer: {fileID: 2104428940}
   SkinButtonPrefab: {fileID: 1347245485274585981, guid: f4730a4978ad90e48b4510e2cf02213d,
     type: 3}

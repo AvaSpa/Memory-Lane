@@ -1,3 +1,4 @@
+using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Utils;
 using UnityEngine;
 
@@ -6,18 +7,19 @@ public class SkinButtonHandler : ClickAction
     public int SkinId;
 
     [HideInInspector]
-    public GameObject[] PossibleSkins;
+    public SkinList Skins;
     [HideInInspector]
     public SkinManager SkinManager;
 
     [SerializeField]
     private GameObject[] _quads;
+
     private const string CurrentSkinKey = "CurrentSkin";
 
     private void Start()
     {
         var visual = gameObject.transform.GetChild(0).gameObject;
-        var skin = GameObject.Instantiate(PossibleSkins[SkinId], visual.transform);
+        var skin = GameObject.Instantiate(Skins.Skins[SkinId].Model, visual.transform);
 
         skin.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 

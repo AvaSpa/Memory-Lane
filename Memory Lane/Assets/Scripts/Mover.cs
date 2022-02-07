@@ -1,3 +1,4 @@
+using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Utils;
 using System.Collections;
 using UnityEngine;
@@ -16,13 +17,27 @@ public class Mover : MonoBehaviour
     public TileGenerator Platform;
     public AudioSource StepAudio;
     public AudioSource FallAudio;
-    public Transform PlayerVisual;
+    public SkinList Skins;
 
     public int Step = 5;
     public float Speed = 0.01f;
 
     [HideInInspector]
     public Vector2 Position;
+
+    private const string CurrentSkinKey = "CurrentSkin";
+
+    private void Start()
+    {
+        Destroy(Body);
+
+        var currentSkinId = PlayerPrefs.GetInt(CurrentSkinKey, 0);
+        var skinPrefab = Skins.Skins[currentSkinId].Model;
+
+        Body = Instantiate(skinPrefab, transform, false);
+        Body.transform.localScale = new Vector3(2, 2, 2);
+        Body.transform.localPosition = new Vector3(0, 2, 0);
+    }
 
     public void MoveForward()
     {
@@ -46,17 +61,17 @@ public class Mover : MonoBehaviour
 
     public void StartWinAnimation()
     {
-        var destination = new Vector3(PlayerVisual.position.x, PlayerVisual.position.y + 2, PlayerVisual.position.z);
+        var destination = new Vector3(Body.transform.position.x, Body.transform.position.y + 2, Body.transform.position.z);
         StartCoroutine(MoveUp(destination, 5));
 
-        StartCoroutine(SpinHelper.WinSpin(PlayerVisual, 75));
+        StartCoroutine(SpinHelper.WinSpin(Body.transform, 75));
     }
 
     private IEnumerator MoveUp(Vector3 position, float speed = 1)
     {
-        while (PlayerVisual.position != position)
+        while (Body.transform.position != position)
         {
-            PlayerVisual.position = Vector3.MoveTowards(PlayerVisual.transform.position, position, speed * Time.deltaTime);
+            Body.transform.position = Vector3.MoveTowards(Body.transform.transform.position, position, speed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
     }
