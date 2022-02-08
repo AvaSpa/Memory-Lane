@@ -14,8 +14,6 @@ public class SkinButtonHandler : ClickAction
     [SerializeField]
     private GameObject[] _quads;
 
-    private const string CurrentSkinKey = "CurrentSkin";
-
     private void Start()
     {
         var visual = gameObject.transform.GetChild(0).gameObject;
@@ -46,6 +44,6 @@ public class SkinButtonHandler : ClickAction
 
     private void SetSkin()
     {
-        PlayerPrefs.SetInt(CurrentSkinKey, SkinId);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentSkinKey, SkinId);
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Level.cs" />
     <Compile Include="Assets\Scripts\LevelScroller.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerPrefsDeleter.cs" />
     <Compile Include="Assets\Scripts\LevelButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\DirectionId.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\SwipeListener.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Scripts\TutorialController.cs" />
     <Compile Include="Assets\Scripts\ResetButtonHandler.cs" />
     <Compile Include="Assets\Scripts\ActionButtonHandler.cs" />
+    <Compile Include="Assets\Scripts\Utils\PlayerPrefsKeys.cs" />
     <Compile Include="Assets\Scripts\TileGenerator.cs" />
     <Compile Include="Assets\Scripts\ContinueButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\Examples\MoveOnSwipe_Vector.cs" />

@@ -1,3 +1,4 @@
+using Assets.Scripts.Utils;
 using TMPro;
 using UnityEngine;
 
@@ -8,19 +9,16 @@ public class LevelManager : MonoBehaviour
     public Transform ButtonContainer;
     public SceneChanger SceneChanger;
 
-    private const string CurrentLevelKey = "CurrentLevel";
-    private const string MaxLevelKey = "MaxLevel";
-
     private void Start()
     {
         const int buttonOffset = 20;
 
-        var maxReachedLevel = PlayerPrefs.GetInt(MaxLevelKey, 1);
-        var currentLevel = PlayerPrefs.GetInt(CurrentLevelKey, 1);
+        var maxReachedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
+        var currentLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentLevelKey, 1);
         if (maxReachedLevel < currentLevel)
         {
             maxReachedLevel = currentLevel;
-            PlayerPrefs.SetInt(MaxLevelKey, maxReachedLevel);
+            PlayerPrefs.SetInt(PlayerPrefsKeys.MaxLevelKey, maxReachedLevel);
         }
 
         for (var i = 0; i < maxReachedLevel; i++)

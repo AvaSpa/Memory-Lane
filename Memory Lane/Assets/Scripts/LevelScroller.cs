@@ -1,3 +1,4 @@
+using Assets.Scripts.Utils;
 using DG.Tweening;
 using GG.Infrastructure.Utils.Swipe;
 using UnityEngine;
@@ -7,8 +8,6 @@ public class LevelScroller : MonoBehaviour
     public float Speed = 0.25f;
     public Transform CameraSupport;
 
-    private const string MaxLevelKey = "MaxLevel";
-
     public void OnSwipeHandler(string id)
     {
         var cameraSupportRotation = CameraSupport.rotation.eulerAngles;
@@ -17,7 +16,7 @@ public class LevelScroller : MonoBehaviour
         switch (id)
         {
             case DirectionId.ID_UP:
-                var maxReachedLevel = PlayerPrefs.GetInt(MaxLevelKey, 1);
+                var maxReachedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
                 var maxIsEven = maxReachedLevel % 2 == 0;
                 var limit = -1 * (20 - maxReachedLevel * 10) - (maxIsEven ? 20 : 40);
                 if (transform.position.y >= limit) return;

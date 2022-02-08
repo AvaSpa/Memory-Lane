@@ -25,13 +25,11 @@ public class Mover : MonoBehaviour
     [HideInInspector]
     public Vector2 Position;
 
-    private const string CurrentSkinKey = "CurrentSkin";
-
     private void Start()
     {
         Destroy(Body);
 
-        var currentSkinId = PlayerPrefs.GetInt(CurrentSkinKey, 0);
+        var currentSkinId = PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentSkinKey, 0);
         var skinPrefab = Skins.Skins[currentSkinId].Model;
 
         Body = Instantiate(skinPrefab, transform, false);

@@ -1,3 +1,4 @@
+using Assets.Scripts.Utils;
 using UnityEngine;
 
 public class LevelButtonHandler : ClickAction
@@ -7,8 +8,6 @@ public class LevelButtonHandler : ClickAction
     [HideInInspector]
     public SceneChanger SceneChanger;
 
-    private const string CurrentLevelKey = "CurrentLevel";
-
     protected override void Act()
     {
         LoadLevel();
@@ -16,7 +15,7 @@ public class LevelButtonHandler : ClickAction
 
     private void LoadLevel()
     {
-        PlayerPrefs.SetInt(CurrentLevelKey, LevelNumber);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentLevelKey, LevelNumber);
         SceneChanger.FadeToScene(Assets.Scripts.Enums.SceneIdentity.Main);
     }
 }

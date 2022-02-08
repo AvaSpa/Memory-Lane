@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,12 +16,9 @@ public class GameController : MonoBehaviour
     public CameraController CameraController;
     public GameObject EndMessage;
 
-    private const string CurrentLevelKey = "CurrentLevel";
-    private const string MaxLevelKey = "MaxLevel";
-
     private void Awake()
     {
-        CurrentLevel = PlayerPrefs.GetInt(CurrentLevelKey, 1);
+        CurrentLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentLevelKey, 1);
         LevelText.text = $"Level: {CurrentLevel}";
     }
 
@@ -39,11 +37,11 @@ public class GameController : MonoBehaviour
         Mover.StartWinAnimation();
 
         CurrentLevel++;
-        PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentLevelKey, CurrentLevel);
 
-        var currentMaxLevel = PlayerPrefs.GetInt(MaxLevelKey, 1);
+        var currentMaxLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
         if (currentMaxLevel <= CurrentLevel)
-            PlayerPrefs.SetInt(MaxLevelKey, CurrentLevel);
+            PlayerPrefs.SetInt(PlayerPrefsKeys.MaxLevelKey, CurrentLevel);
 
         PlayerPrefs.Save();
 
@@ -53,8 +51,8 @@ public class GameController : MonoBehaviour
         {
             EndMessage.SetActive(true);
             CurrentLevel--;
-            PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
-            PlayerPrefs.SetInt(MaxLevelKey, currentMaxLevel);
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentLevelKey, CurrentLevel);
+            PlayerPrefs.SetInt(PlayerPrefsKeys.MaxLevelKey, currentMaxLevel);
             return;
         }
 

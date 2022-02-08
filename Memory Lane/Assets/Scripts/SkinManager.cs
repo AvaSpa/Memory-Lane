@@ -1,4 +1,5 @@
 using Assets.Scripts.ScriptableObjects;
+using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,13 +11,10 @@ public class SkinManager : MonoBehaviour
 
     private List<SkinButtonHandler> _skinButtons = new List<SkinButtonHandler>();
 
-    private const string CurrentSkinKey = "CurrentSkin";
-    private const string MaxLevelKey = "MaxLevel";
-
     private void Start()
     {
-        var currentSkin = PlayerPrefs.GetInt(CurrentSkinKey, 0);
-        var maxLevel = PlayerPrefs.GetInt(MaxLevelKey, 1);
+        var currentSkin = PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentSkinKey, 0);
+        var maxLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
 
         var maxSkin = (maxLevel - 10) / 5 + 1;
         if (maxSkin < currentSkin)
