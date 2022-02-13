@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public AudioSource WinMusic;
     public CameraController CameraController;
     public GameObject EndMessage;
+    public AdsController AdsController;
 
     private void Awake()
     {
@@ -61,6 +62,8 @@ public class GameController : MonoBehaviour
         buttonScript.Restart.SetActive(false);
 
         ResetButton.SetActive(true);
+
+        AdsController.SignalLevelCompleted();
     }
 
     private void GameOver()
