@@ -1,0 +1,13 @@
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\LevelInportConverter.exe.config
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\LevelInportConverter.exe
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\LevelInportConverter.pdb
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\EPPlus.dll
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\EPPlus.xml
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\obj\Debug\LevelInportConverter.csprojAssemblyReference.cache
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\obj\Debug\LevelInportConverter.csproj.CoreCompileInputs.cache
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\obj\Debug\LevelInportConverter.csproj.CopyComplete
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\obj\Debug\LevelInportConverter.exe
+C:\Users\Avalon\source\repos\LevelInportConverter\LevelInportConverter\obj\Debug\LevelInportConverter.pdb
