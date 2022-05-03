@@ -8,6 +8,7 @@ namespace Assets.Scripts
         public int GridWidth = 9;
         public int GridHeight = 9;
         public GameObject TileTemplate;
+        public Texture[] Symbols;
 
         private GameObject[,] tiles;
 
@@ -48,16 +49,24 @@ namespace Assets.Scripts
             }
         }
 
+        /// <summary>
+        /// TODO: Make Color-Symbol class and use that in the list. Both here and in the normal tile generator
+        /// </summary>
+        /// <returns></returns>
         private Color GenerateColor(int i, int j)
         {
-            var generatedColor = GetRandomColor();
+            var generatedIndex = GetRandomColorIndex();
+
+            var generatedColor = colors[generatedIndex];
             var previousTileColors = GetPreviousTileColors(i, j);
 
             var maxTryCount = 10;
 
             while (maxTryCount >= 0 && previousTileColors.Contains(generatedColor))
             {
-                generatedColor = GetRandomColor();
+                generatedIndex = GetRandomColorIndex();
+
+                generatedColor = colors[generatedIndex];
 
                 maxTryCount--;
             }
@@ -90,10 +99,9 @@ namespace Assets.Scripts
             return tile.GetComponent<Tile>();
         }
 
-        private Color GetRandomColor()
+        private int GetRandomColorIndex()
         {
-            var index = Random.Range(0, colors.Count);
-            return colors[index];
+            return Random.Range(0, colors.Count);
         }
     }
 }

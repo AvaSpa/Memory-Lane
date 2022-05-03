@@ -4,6 +4,7 @@ public class Tile : MonoBehaviour
 {
     public bool IsLane;
     public Color Color = Color.white;
+    public Texture Texture;
     public bool IsLocked;
     public bool IsLast;
 
@@ -24,5 +25,7 @@ public class Tile : MonoBehaviour
             material.color = new Color(0.2f, 0.2f, 0.2f);
         else
             material.color = Color;
+
+        material.mainTexture = Texture;
     }
 }
