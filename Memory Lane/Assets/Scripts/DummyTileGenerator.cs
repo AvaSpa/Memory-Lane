@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Utils;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class DummyTileGenerator : MonoBehaviour
     {
+        public GameObject TileTemplate;
+
         public int GridWidth = 9;
         public int GridHeight = 9;
-        public GameObject TileTemplate;
-        public Texture[] Symbols;
+        public Texture[] Symbols = new Texture[4];
 
         private GameObject[,] tiles;
 
@@ -43,17 +45,13 @@ namespace Assets.Scripts
                         tile = tiles[i, j];
 
                     var tileScript = tile.GetComponent<Tile>();
-                    tileScript.Color = GenerateColor(i, j);
+                    tileScript.Identity = GenerateIdentity(i, j);
                     tileScript.UpdateVisuals();
                 }
             }
         }
 
-        /// <summary>
-        /// TODO: Make Color-Symbol class and use that in the list. Both here and in the normal tile generator
-        /// </summary>
-        /// <returns></returns>
-        private Color GenerateColor(int i, int j)
+        private TileIdentity GenerateIdentity(int i, int j)
         {
             var generatedIndex = GetRandomColorIndex();
 
@@ -65,13 +63,14 @@ namespace Assets.Scripts
             while (maxTryCount >= 0 && previousTileColors.Contains(generatedColor))
             {
                 generatedIndex = GetRandomColorIndex();
-
                 generatedColor = colors[generatedIndex];
 
                 maxTryCount--;
             }
 
-            return generatedColor;
+            var result = new TileIdentity(generatedColor, Symbols[generatedIndex]);
+
+            return result;
         }
 
         private List<Color> GetPreviousTileColors(int i, int j)
@@ -79,13 +78,13 @@ namespace Assets.Scripts
             var result = new List<Color>();
 
             var previous1 = GetTileScript(i - 2, j);
-            if (previous1 != null) result.Add(previous1.Color);
+            if (previous1 != null) result.Add(previous1.Identity.Color);
             var previous2 = GetTileScript(i, j - 2);
-            if (previous2 != null) result.Add(previous2.Color);
+            if (previous2 != null) result.Add(previous2.Identity.Color);
             var previous3 = GetTileScript(i - 1, j - 1);
-            if (previous3 != null) result.Add(previous3.Color);
+            if (previous3 != null) result.Add(previous3.Identity.Color);
             var previous4 = GetTileScript(i - 1, j + 1);
-            if (previous4 != null) result.Add(previous4.Color);
+            if (previous4 != null) result.Add(previous4.Identity.Color);
 
             return result;
         }

@@ -261,10 +261,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1b956c7e2a34b45bec163072ccdd40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridWidth: 9
-  GridHeight: 9
   TileTemplate: {fileID: 4896358300866537188, guid: 1fbcbfb52c122a54995fb188eff0bbcb,
     type: 3}
+  GridWidth: 9
+  GridHeight: 9
+  Symbols:
+  - {fileID: 2800000, guid: d4bb994a2f22f194b9f570dc69facf35, type: 3}
+  - {fileID: 2800000, guid: 216525e0b9ac7ca4bb64254d47345c9f, type: 3}
+  - {fileID: 2800000, guid: 46def805a2b469c46bfdbc2929508830, type: 3}
+  - {fileID: 2800000, guid: b1badba70c7ce004b96ded76823fc812, type: 3}
 --- !u!4 &448826709
 Transform:
   m_ObjectHideFlags: 0

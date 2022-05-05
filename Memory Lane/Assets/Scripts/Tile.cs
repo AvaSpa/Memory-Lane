@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Utils;
+using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     public bool IsLane;
-    public Color Color = Color.white;
-    public Texture Texture;
+    public TileIdentity Identity;
     public bool IsLocked;
     public bool IsLast;
+    public GameObject Base;
+    public GameObject Symbol;
 
     private void Start()
     {
@@ -20,12 +22,31 @@ public class Tile : MonoBehaviour
 
     public void UpdateVisuals()
     {
-        var material = GetComponent<Renderer>().material;
+        UpdateBaseVisuals();
+        UpdateSymbol();
+    }
+
+    private void UpdateBaseVisuals()
+    {
+        var material = Base.GetComponent<Renderer>().material;
+
+        if (Identity != null)
+            material.color = Identity.Color;
+
         if (IsLocked)
             material.color = new Color(0.2f, 0.2f, 0.2f);
-        else
-            material.color = Color;
+    }
 
-        material.mainTexture = Texture;
+    private void UpdateSymbol()
+    {
+        var material = Symbol.GetComponent<Renderer>().material;
+
+        if (Identity == null || Identity.Symbol == null)
+            material.color = new Color(1.0f, 1.0f, 1.0f, 0f);
+        else
+        {
+            material.mainTexture = Identity.Symbol;
+            material.color = new Color(1.0f, 1.0f, 1.0f, 0.6f);
+        }
     }
 }

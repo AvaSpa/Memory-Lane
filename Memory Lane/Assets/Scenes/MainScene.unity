@@ -3635,6 +3635,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08cccf962ec40244bb53b2be2b29acac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Symbols:
+  - {fileID: 2800000, guid: d4bb994a2f22f194b9f570dc69facf35, type: 3}
+  - {fileID: 2800000, guid: 216525e0b9ac7ca4bb64254d47345c9f, type: 3}
+  - {fileID: 2800000, guid: 46def805a2b469c46bfdbc2929508830, type: 3}
+  - {fileID: 2800000, guid: b1badba70c7ce004b96ded76823fc812, type: 3}
   TileTemplate: {fileID: 4896358300866537188, guid: 1fbcbfb52c122a54995fb188eff0bbcb,
     type: 3}
   LaneTileBaseTemplate: {fileID: 3942690339673815412, guid: c7fce4e7816f83a4b9c94974615554c7,

@@ -45,7 +45,7 @@ public class ActionButtonHandler : MonoBehaviour
         var nextTileRight = Platform.GetTileScript(curentPosition.x + 1, curentPosition.y);
         list.Add(nextTileRight);
 
-        var candidateTiles = list.Where(t => t != null && t.Color == Color);
+        var candidateTiles = list.Where(t => t != null && t.Identity.Color == Color);
         var correctTile = candidateTiles.FirstOrDefault(t => t.IsLane && !t.IsLocked);
 
         if (correctTile == null) correctTile = candidateTiles.FirstOrDefault(t => !t.IsLocked);

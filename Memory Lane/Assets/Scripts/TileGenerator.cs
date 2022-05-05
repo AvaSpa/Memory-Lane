@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Utils;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class TileGenerator : MonoBehaviour
     private const float StartingX = 2;
     private const float StartingZ = -2;
     private List<Color> colors = new List<Color> { Color.red, new Color(1, 1, 0, 1), Color.green, Color.blue };
+    public Texture[] Symbols = new Texture[4];
 
     private List<Vector2> _lane = new List<Vector2>();
 
@@ -53,7 +55,7 @@ public class TileGenerator : MonoBehaviour
                 var currentCoordinates = new Vector2(i, j);
 
                 var tileScript = GetTileScript(currentCoordinates);
-                tileScript.Color = GenerateColor(currentCoordinates);
+                tileScript.Identity = GenerateIdentity(currentCoordinates);
                 tileScript.UpdateVisuals();
             }
         }
@@ -110,21 +112,24 @@ public class TileGenerator : MonoBehaviour
         Mover.Position = firstTileCoordinates;
     }
 
-    private Color GenerateColor(Vector2 coordinates)
+    private TileIdentity GenerateIdentity(Vector2 coordinates)
     {
-        var generatedColor = GetRandomColor();
+        var index = GetRandomIndex();
+
+        var generatedColor = colors[index];
         var previousTileColors = GetPreviousTileColors(coordinates);
 
         var maxTryCount = 10;
 
         while (maxTryCount >= 0 && previousTileColors.Contains(generatedColor))
         {
-            generatedColor = GetRandomColor();
+            index = GetRandomIndex();
+            generatedColor = colors[index];
 
             maxTryCount--;
         }
 
-        return generatedColor;
+        return new TileIdentity(generatedColor, Symbols[index]);
     }
 
     private List<Color> GetPreviousTileColors(Vector2 coordinates)
@@ -132,21 +137,21 @@ public class TileGenerator : MonoBehaviour
         var result = new List<Color>();
 
         var previous1 = GetTileScript(new Vector2(coordinates.x - 2, coordinates.y));
-        if (previous1 != null) result.Add(previous1.Color);
+        if (previous1 != null) result.Add(previous1.Identity.Color);
         var previous2 = GetTileScript(new Vector2(coordinates.x, coordinates.y - 2));
-        if (previous2 != null) result.Add(previous2.Color);
+        if (previous2 != null) result.Add(previous2.Identity.Color);
         var previous3 = GetTileScript(new Vector2(coordinates.x - 1, coordinates.y - 1));
-        if (previous3 != null) result.Add(previous3.Color);
+        if (previous3 != null) result.Add(previous3.Identity.Color);
         var previous4 = GetTileScript(new Vector2(coordinates.x - 1, coordinates.y + 1));
-        if (previous4 != null) result.Add(previous4.Color);
+        if (previous4 != null) result.Add(previous4.Identity.Color);
 
         return result;
     }
 
-    private Color GetRandomColor()
+    private int GetRandomIndex()
     {
         var index = Random.Range(0, colors.Count);
-        return colors[index];
+        return index;
     }
 
     public void GenerateTiles()
@@ -157,7 +162,7 @@ public class TileGenerator : MonoBehaviour
             {
                 var position = new Vector3(StartingX + i * 4, 0, StartingZ - j * 4);
 
-                GameObject tile = null;
+                GameObject tile;
                 if (tiles[i, j] == null)
                 {
                     tile = Instantiate(TileTemplate, position, Quaternion.identity, transform);
@@ -167,7 +172,7 @@ public class TileGenerator : MonoBehaviour
                     tile = tiles[i, j];
 
                 var tileScript = tile.GetComponent<Tile>();
-                tileScript.Color = new Color(0.5f, 0.5f, 0.5f);
+                tileScript.Identity = new TileIdentity(new Color(0.5f, 0.5f, 0.5f), null);
                 tileScript.UpdateVisuals();
             }
         }
@@ -179,16 +184,16 @@ public class TileGenerator : MonoBehaviour
 
             var tileScript = GetTileScript(laneStep);
             tileScript.IsLane = true;
-            tileScript.Color = new Color(0.2f, 0.2f, 0.2f);
+            tileScript.Identity = new TileIdentity(new Color(0.2f, 0.2f, 0.2f), null);
             tileScript.UpdateVisuals();
         }
 
         var firstTileScript = GetTileScript(_lane.First());
-        firstTileScript.Color = Color.white;
+        firstTileScript.Identity.Color = Color.white;
         firstTileScript.UpdateVisuals();
         var lastTileScript = GetTileScript(_lane.Last());
         lastTileScript.IsLast = true;
-        lastTileScript.Color = Color.black;
+        lastTileScript.Identity.Color = Color.black;
         lastTileScript.UpdateVisuals();
 
         RestoreTiles();

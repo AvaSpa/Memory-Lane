@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\TileGenerator.cs" />
     <Compile Include="Assets\Scripts\ContinueButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Swipe\Scripts\Examples\MoveOnSwipe_Vector.cs" />
+    <Compile Include="Assets\Scripts\Utils\TileIdentity.cs" />
     <Compile Include="Assets\Scripts\Utils\SpinHelper.cs" />
     <Compile Include="Assets\Scripts\CountDown.cs" />
     <Compile Include="Assets\Scripts\Spin.cs" />
