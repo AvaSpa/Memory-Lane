@@ -3,7 +3,7 @@ using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkinManager : MonoBehaviour
+public class SkinListManager : MonoBehaviour
 {
     public SkinList Skins;
     public Transform ButtonContainer;
@@ -14,13 +14,8 @@ public class SkinManager : MonoBehaviour
     private void Start()
     {
         var currentSkin = PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentSkinKey, 0);
-        var maxLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
 
-        var maxSkin = (maxLevel - 10) / 5 + 1;
-        if (maxSkin < currentSkin)
-            maxSkin = currentSkin;
-        if (maxSkin >= Skins.Skins.Count)
-            maxSkin = Skins.Skins.Count - 1;
+        var maxSkin = SkinManager.GetMaxSkin(Skins.Skins.Count);
 
         if (maxSkin == 0)
             AddButton(0);
@@ -43,7 +38,7 @@ public class SkinManager : MonoBehaviour
         var skinButtonHandler = listItem.GetComponent<SkinButtonHandler>();
         skinButtonHandler.SkinId = i;
         skinButtonHandler.Skins = Skins;
-        skinButtonHandler.SkinManager = this;
+        skinButtonHandler.SkinListManager = this;
         _skinButtons.Add(skinButtonHandler);
 
         SetVisibility(listItem, i);

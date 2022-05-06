@@ -9,7 +9,7 @@ public class SkinButtonHandler : ClickAction
     [HideInInspector]
     public SkinList Skins;
     [HideInInspector]
-    public SkinManager SkinManager;
+    public SkinListManager SkinListManager;
 
     [SerializeField]
     private GameObject[] _quads;
@@ -27,7 +27,7 @@ public class SkinButtonHandler : ClickAction
     protected override void Act()
     {
         SetSkin();
-        SkinManager.MarkSelectedSkin(SkinId);
+        SkinListManager.MarkSelectedSkin(SkinId);
     }
 
     public void ToggleSelected(bool selected)

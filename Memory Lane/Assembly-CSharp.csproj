@@ -103,7 +103,8 @@
     <Compile Include="Assets\Scripts\Swipe\Scripts\DirectionPresets.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
-    <Compile Include="Assets\Scripts\SkinManager.cs" />
+    <Compile Include="Assets\Scripts\SkinListManager.cs" />
+    <Compile Include="Assets\Scripts\Utils\SkinManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
     public CameraController CameraController;
     public GameObject EndMessage;
     public AdsController AdsController;
+    public SkinList Skins;
 
     private void Awake()
     {
@@ -54,6 +56,7 @@ public class GameController : MonoBehaviour
             CurrentLevel--;
             PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentLevelKey, CurrentLevel);
             PlayerPrefs.SetInt(PlayerPrefsKeys.MaxLevelKey, currentMaxLevel);
+            PlayerPrefs.Save();
             return;
         }
 
@@ -64,6 +67,17 @@ public class GameController : MonoBehaviour
         ResetButton.SetActive(true);
 
         AdsController.SignalLevelCompleted();
+
+        var latestUnlockedSkin = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxSkinKey, 0);
+        var availableSkinCount = Skins.Skins.Count;
+        var maxSkin = SkinManager.GetMaxSkin(availableSkinCount);
+
+        if (maxSkin > latestUnlockedSkin)
+        {
+            //TODO: test it (doesn't trigger when completing level 11)
+            Debug.Log($"Unlocked skin: {maxSkin}");
+            //TODO: instantiate the correct skin and show it somehow pretty (maybe with a copy of the player because it's easier)
+        }
     }
 
     private void GameOver()

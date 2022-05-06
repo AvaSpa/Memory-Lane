@@ -2590,4 +2590,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.25
   CameraSupport: {fileID: 1424730757}
-  SkinManager: {fileID: 1601223733}
+  SkinListManager: {fileID: 1601223733}

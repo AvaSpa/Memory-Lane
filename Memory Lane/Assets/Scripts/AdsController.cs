@@ -18,9 +18,8 @@ public class AdsController : MonoBehaviour
     {
         _maxReachedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
 
-        Advertisement.Initialize(GameId, TestMode);
-
-        Debug.Log("Initialized ads.");
+        if (!Advertisement.isInitialized)
+            Advertisement.Initialize(GameId, TestMode);
     }
 
     public void SignalLevelCompleted()

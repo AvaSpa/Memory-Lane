@@ -1058,6 +1058,7 @@ MonoBehaviour:
   CameraController: {fileID: 963194229}
   EndMessage: {fileID: 1058326106}
   AdsController: {fileID: 375340022}
+  Skins: {fileID: 11400000, guid: d32cce909d7fad24cb28065bf8c4b93b, type: 2}
 --- !u!4 &680007978
 Transform:
   m_ObjectHideFlags: 0
