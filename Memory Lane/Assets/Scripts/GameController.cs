@@ -74,9 +74,10 @@ public class GameController : MonoBehaviour
 
         if (maxSkin > latestUnlockedSkin)
         {
-            //TODO: test it (doesn't trigger when completing level 11)
-            Debug.Log($"Unlocked skin: {maxSkin}");
-            //TODO: instantiate the correct skin and show it somehow pretty (maybe with a copy of the player because it's easier)
+            var skin = Skins.Skins[maxSkin];
+            var playerVisual = Mover.Body.transform;
+            var skinObject = Instantiate(skin.Model, playerVisual);
+            skinObject.transform.localPosition = new Vector3(0, 10, 0);
         }
     }
 
