@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
 
         ResetButton.SetActive(true);
 
-        AdsController.SignalLevelCompleted();
+        AdsController.SignalLevelCompleted();//TODO: fix ad being shown every level
 
         var latestUnlockedSkin = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxSkinKey, 0);
         var availableSkinCount = Mover.Skins.Skins.Count;
@@ -72,16 +72,28 @@ public class GameController : MonoBehaviour
 
         if (maxSkin > latestUnlockedSkin)
         {
-            var playerVisualRenderer = Mover.Body.GetComponent<MeshRenderer>();
-            playerVisualRenderer.enabled = false;
+            ReplacePlayerVisual(maxSkin);
 
-            var skin = Mover.Skins.Skins[maxSkin];
-            var playerVisual = Mover.Body.transform;
-            Instantiate(skin.Model, playerVisual);
-
-            //TODO: show message just like when ending the game "new skin unlocked; go to menu to select it"
-            Debug.Log("Congratulations! You have unlocked a new skin. Go to the main menu to switch skins.");
+            ShowSkinUnlockedMessage();
         }
+    }
+
+    private void ShowSkinUnlockedMessage()
+    {
+        var text = EndMessage.GetComponentInChildren<Text>();
+        text.text = "Congratulations!\nYou have unlocked a new skin.\nGo to the main menu to switch skins.";
+        text.fontSize = 48;
+        EndMessage.SetActive(true);
+    }
+
+    private void ReplacePlayerVisual(int maxSkin)
+    {
+        var playerVisualRenderer = Mover.Body.GetComponent<MeshRenderer>();
+        playerVisualRenderer.enabled = false;
+
+        var skin = Mover.Skins.Skins[maxSkin];
+        var playerVisual = Mover.Body.transform;
+        Instantiate(skin.Model, playerVisual);
     }
 
     private void GameOver()
