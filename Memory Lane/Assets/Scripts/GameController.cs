@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts;
-using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +16,6 @@ public class GameController : MonoBehaviour
     public CameraController CameraController;
     public GameObject EndMessage;
     public AdsController AdsController;
-    public SkinList Skins;
 
     private void Awake()
     {
@@ -69,15 +67,20 @@ public class GameController : MonoBehaviour
         AdsController.SignalLevelCompleted();
 
         var latestUnlockedSkin = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxSkinKey, 0);
-        var availableSkinCount = Skins.Skins.Count;
+        var availableSkinCount = Mover.Skins.Skins.Count;
         var maxSkin = SkinManager.GetMaxSkin(availableSkinCount);
 
         if (maxSkin > latestUnlockedSkin)
         {
-            var skin = Skins.Skins[maxSkin];
+            var playerVisualRenderer = Mover.Body.GetComponent<MeshRenderer>();
+            playerVisualRenderer.enabled = false;
+
+            var skin = Mover.Skins.Skins[maxSkin];
             var playerVisual = Mover.Body.transform;
-            var skinObject = Instantiate(skin.Model, playerVisual);
-            skinObject.transform.localPosition = new Vector3(0, 10, 0);
+            Instantiate(skin.Model, playerVisual);
+
+            //TODO: show message just like when ending the game "new skin unlocked; go to menu to select it"
+            Debug.Log("Congratulations! You have unlocked a new skin. Go to the main menu to switch skins.");
         }
     }
 
