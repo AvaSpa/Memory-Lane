@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
         WinMusic.Play();
         CameraController.ShowPlayerInDetail();
         Mover.StartWinAnimation();
+        //TODO: play win particles
 
         CurrentLevel++;
         PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentLevelKey, CurrentLevel);
@@ -73,6 +74,7 @@ public class GameController : MonoBehaviour
         if (maxSkin > latestUnlockedSkin)
         {
             ReplacePlayerVisual(maxSkin);
+            //TODO: play new skin particles
 
             ShowSkinUnlockedMessage();
         }
