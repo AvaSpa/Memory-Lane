@@ -10,27 +10,33 @@ public class AdsController : MonoBehaviour
     private const int MinimumLevel = 7;
     private const bool TestMode = false;
 
-    private int _playedLevelCount;
-    private int _maxReachedLevel;
-
-
     private void Awake()
     {
-        _maxReachedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
-
         if (!Advertisement.isInitialized)
             Advertisement.Initialize(GameId, TestMode);
     }
 
     public void SignalLevelCompleted()
     {
-        if (_maxReachedLevel < MinimumLevel) return;
+        var maxReachedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MaxLevelKey, 1);
+        if (maxReachedLevel < MinimumLevel) return;
 
-        if (_playedLevelCount == 0 && Advertisement.isInitialized)
+        var playedLevelCount = PlayerPrefs.GetInt(PlayerPrefsKeys.PlayedLevelCountKey, -1);
+        if (playedLevelCount == 0 && Advertisement.isInitialized)
             Advertisement.Show(PlacementId);
 
-        _playedLevelCount++;
-        if (_playedLevelCount >= LevelInterval)
-            _playedLevelCount = 0;
+        if (playedLevelCount >= 0)
+            playedLevelCount++;
+        else
+            playedLevelCount = 1;
+        PlayerPrefs.SetInt(PlayerPrefsKeys.PlayedLevelCountKey, playedLevelCount);
+        PlayerPrefs.Save();
+
+        if (playedLevelCount >= LevelInterval)
+        {
+            playedLevelCount = 0;
+            PlayerPrefs.SetInt(PlayerPrefsKeys.PlayedLevelCountKey, playedLevelCount);
+            PlayerPrefs.Save();
+        }
     }
 }

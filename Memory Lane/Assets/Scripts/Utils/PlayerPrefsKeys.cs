@@ -6,5 +6,6 @@
         public static string MaxLevelKey => "MaxLevel";
         public static string CurrentSkinKey => "CurrentSkin";
         public static string MaxSkinKey => "MaxSkin";
+        public static string PlayedLevelCountKey => "PlayedLevelCount";
     }
 }
